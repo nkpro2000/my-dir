@@ -1,6 +1,10 @@
 """ $ tree -aF ~/nk
 ~/nk/
 :
+├── .53c2375/
+│   ├── secret5.sh
+│   └── secret5.py
+│   :
 ├── assets/
 │   ├── nk.ico
 │   ├── NK.ico
@@ -9,7 +13,7 @@
 │   :
 ├── Dev/
 │   ├── bin/
-│   |   ├── code -> ../code/bin/
+│   │   ├── code -> ../code/bin/
 │   │   :
 │   ├── code -> <any_code_editor>/
 │   ├── <any_code_editor>/ (eg: VScodium)
@@ -69,8 +73,8 @@ DEV_DIR_ICON = os.path.join(NK_DIR, 'Dev/.directory')
 with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
     dev_dir_icon.write('[Desktop Entry]\nIcon={}\n'.format(os.path.join(NK_DIR, 'assets/NK.ico')))
 
-# Adding nkDev to ~/.bashrc
-############################
+# Adding nkDev, nkSecret5 to ~/.bashrc
+#######################################
 
 BASHRC = os.path.join(HOME_DIR, '.bashrc')
 
@@ -82,8 +86,19 @@ for fd in $HOME/nk/Dev/bin/*; do
         path+=":$(realpath "$fd")";
     fi
 done
-export PATH="$path:$PATH"
+[[ $PATH == *"$path"* ]] || export PATH="$path:$PATH"
+unset path
 #nkDev}
+'''
+
+nkSecret5 = r'''
+#nkSecret5{
+pypath="$HOME/nk/.53c2375"
+if [[ $PYTHONPATH != *"$pypath"* ]]; then
+    export PYTHONPATH+="${PYTHONPATH+:}$pypath";
+fi
+unset pypath
+#nkSecret5}
 '''
 
 with open(BASHRC) as bashrc:
@@ -94,3 +109,9 @@ if nkDev in bashrc_:
 else:
     with open(BASHRC, 'a') as bashrc:
         bashrc.write(nkDev)
+
+if nkSecret5 in bashrc_:
+    print('Already Added nkSecret5 to ~/.bashrc')
+else:
+    with open(BASHRC, 'a') as bashrc:
+        bashrc.write(nkSecret5)
