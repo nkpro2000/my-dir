@@ -16,11 +16,20 @@
 │   │   ├── code -> ../code/bin/
 │   │   :
 │   ├── code -> <any_code_editor>/
+│   │   :
 │   ├── <any_code_editor>/ (eg: VScodium)
+│   │   :
+│   │   ├── data/ (for Portable Mode)
+│   │   :
+│   ├── jupyter/
+│   │   ├── config/
+│   │   │   :
+│   │   └── data/
 │   │   :
 │   ├── lobby/
 │   :
 ├── nk.py
+│   :
 ├── setup-nk.py
 :
 """
@@ -56,7 +65,7 @@ nk_place = SYSTEM_PATTERN.sub('<isSystemItem>false</', nk_place)
 nk_place = HIDDEN_PATTERN.sub('<IsHidden>false</', nk_place)
 
 if nk_place in places:
-    print('Already Added NK to user-palces')
+    print('I> Already Added NK to user-palces')
 else:
     new_places = places[:home_place.end()]+nk_place+places[home_place.end():]
     # make a backup
@@ -105,13 +114,51 @@ with open(BASHRC) as bashrc:
     bashrc_ = bashrc.read()
 
 if nkDev in bashrc_:
-    print('Already Added nkDev to ~/.bashrc')
+    print('I> Already Added nkDev to ~/.bashrc')
 else:
     with open(BASHRC, 'a') as bashrc:
         bashrc.write(nkDev)
 
 if nkSecret5 in bashrc_:
-    print('Already Added nkSecret5 to ~/.bashrc')
+    print('I> Already Added nkSecret5 to ~/.bashrc')
 else:
     with open(BASHRC, 'a') as bashrc:
         bashrc.write(nkSecret5)
+
+# Setting CONFIG & DATA dir for Jupyter
+########################################
+
+os.makedirs(os.path.join(NK_DIR, "Dev/jupyter/config"), exist_ok=True)
+os.makedirs(os.path.join(NK_DIR, "Dev/jupyter/data"), exist_ok=True)
+
+jupyterDir = r'''
+#jupyterDir{
+export JUPYTER_CONFIG_DIR="$HOME/nk/Dev/jupyter/config"
+export JUPYTER_DATA_DIR="$HOME/nk/Dev/jupyter/data"
+#jupyterDir}
+'''
+
+if jupyterDir in bashrc_:
+    print('I> Already Added jupyterDir to ~/.bashrc')
+else:
+    with open(BASHRC, 'a') as bashrc:
+        bashrc.write(jupyterDir)
+
+os.system('sudo pacman -S jupyter{,lab,-notebook} python-ipykernel')
+
+# Installing SageMath
+######################
+
+#sagemath_alias = r'''
+##sageMath{
+#alias guru='sage -n jupyter'
+##sageMath}
+#'''
+
+#if sagemath_alias in bashrc_:
+    #print('I> Already Added sagemath_alias to ~/.bashrc')
+#else:
+    #with open(BASHRC, 'a') as bashrc:
+        #bashrc.write(sagemath_alias)
+
+os.system('sudo pacman -S sagemath{,-doc,-jupyter} cantor')
