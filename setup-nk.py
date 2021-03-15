@@ -17,9 +17,13 @@
 │   │   :
 │   ├── code -> <any_code_editor>/
 │   │   :
+│   ├── code-data/
+│   │   :
 │   ├── <any_code_editor>/ (eg: VScodium)
 │   │   :
-│   │   ├── data/ (for Portable Mode)
+│   │   ├── bin/
+│   │   :
+│   │   ├── data -> ../code-data/ (for Portable Mode)
 │   │   :
 │   ├── jupyter/
 │   │   ├── config/
