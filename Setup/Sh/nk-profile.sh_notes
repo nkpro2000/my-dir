@@ -1,0 +1,157 @@
+https://unix.stackexchange.com/questions/48786/how-can-i-test-for-posix-compliance-of-shell-scripts
+https://github.com/koalaman/shellcheck/wiki/SC2039
+https://stackoverflow.com/questions/11376975/is-there-a-minimally-posix-2-compliant-shell
+
+
+
+~/nk/Lobby >>> ls -l d*                                                         
+dr:
+ls: cannot access 'dr/hi': Permission denied
+total 0
+-????????? ? ? ? ?            ? hi
+
+drw:
+ls: cannot access 'drw/hi': Permission denied
+total 0
+-????????? ? ? ? ?            ? hi
+
+drwx:
+total 0
+-rw-r--r-- 1 nkpro root 0 Jul 26 14:11 hi
+
+drx:
+total 0
+-rw-r--r-- 1 nkpro root 0 Jul 26 14:10 hi
+ls: cannot open directory 'dw': Permission denied
+ls: cannot open directory 'dwx': Permission denied
+ls: cannot open directory 'dx': Permission denied
+~/nk/Lobby >>> file d*/hi                                                    [2]
+dr/hi:   cannot open `dr/hi' (Permission denied)
+drw/hi:  cannot open `drw/hi' (Permission denied)
+drwx/hi: empty
+drx/hi:  empty
+~/nk/Lobby >>> ls d*                                                            
+dr:
+hi
+
+drw:
+hi
+
+drwx:
+hi
+
+drx:
+hi
+ls: cannot open directory 'dw': Permission denied
+ls: cannot open directory 'dwx': Permission denied
+ls: cannot open directory 'dx': Permission denied
+~/nk/Lobby >>> ls -ld d*                                                     [2]
+dr--r--r-- 2 nkpro nkpro 4096 Jul 26 13:58 dr
+drw-r--r-- 2 nkpro nkpro 4096 Jul 26 14:10 drw
+drwxr-xr-x 2 nkpro nkpro 4096 Jul 26 14:11 drwx
+dr-xr-xr-x 2 nkpro nkpro 4096 Jul 26 14:10 drx
+d-w------- 2 nkpro nkpro 4096 Jul 26 14:10 dw
+d-wx--x--x 2 nkpro nkpro 4096 Jul 26 14:10 dwx
+d--x--x--x 2 nkpro nkpro 4096 Jul 26 14:10 dx
+~/nk/Lobby >>> 
+
+
+/tmp/home >>> dash                                                              
+$ PATH=/tmp/home/nk/Dev/bin:/tmp/home/nk/Dev/bin/sudo:/tmp/home/nk/Dev/bin/user:/tmp/home/nk/Dev/bin/test:/usr/sbin
+$ ls -ld /tmp/home/nk/Dev/bin
+dr-xr-xr-x 5 nkpro nkpro 120 Jul 26 20:38 /tmp/home/nk/Dev/bin
+$ ls -ld /tmp/home/nk/Dev/bin/*
+-rwxr-xr-x 1 nkpro nkpro 22 Jul 26 19:55 /tmp/home/nk/Dev/bin/hi.sh
+d--x--x--x 2 nkpro nkpro 60 Jul 26 19:54 /tmp/home/nk/Dev/bin/sudo
+dr--r--r-- 2 nkpro root  60 Jul 26 20:39 /tmp/home/nk/Dev/bin/test
+dr-xr-xr-x 2 nkpro nkpro 60 Jul 26 19:54 /tmp/home/nk/Dev/bin/user
+$ which hi.sh user.sh sudo.sh tesst.sh
+/tmp/home/nk/Dev/bin/hi.sh
+/tmp/home/nk/Dev/bin/user/user.sh
+/tmp/home/nk/Dev/bin/sudo/sudo.sh
+which: no tesst.sh in (/tmp/home/nk/Dev/bin:/tmp/home/nk/Dev/bin/sudo:/tmp/home/nk/Dev/bin/user:/tmp/home/nk/Dev/bin/test:/usr/sbin)
+$ sudo which hi.sh user.sh sudo.sh tesst.sh
+/tmp/home/nk/Dev/bin/hi.sh
+/tmp/home/nk/Dev/bin/user/user.sh
+/tmp/home/nk/Dev/bin/sudo/sudo.sh
+/tmp/home/nk/Dev/bin/test/tesst.sh
+$ hi.sh && user.sh && sudo.sh
+bye
+User/Sudo
+Sudo
+$ tesst.sh
+dash: 7: tesst.sh: Permission denied
+$ sudo hi.sh && sudo user.sh && sudo sudo.sh
+bye
+User/Sudo
+Sudo
+$ sudo tesst.sh
+tessst
+$ 
+/tmp/home >>> 
+
+https://unix.stackexchange.com/questions/21251/execute-vs-read-bit-how-do-directory-permissions-in-linux-work
+https://askubuntu.com/questions/83788/accessing-files-in-a-directory-without-x-permission
+https://unix.stackexchange.com/questions/251276/why-can-i-see-the-directory-without-read-privilege
+
+the directory itself only contains filenames and inode numbers—that's all.
+Read access to the filenames is controlled by the read permission.
+Access to the inodes pointed to by the directory is controlled by the execute permission—not the read permission. The inodes contain all the actual details about the file, such as filesize, owner, permissions, time last modified, and the physical location (on your physical hard disk) of the binary data which comprises the file's contents.
+
+And finally, to view the contents of a file—you need:
+    read permissions on the file itself,
+    execute permissions on the directory that contains the file*, and
+    at least one of: read permissions on the directory containing the file OR the knowledge of the name of the file through some other means.
+
+The only thing that the x permission does not seem to prevent is to access the names of the files in that directory.
+
+which command able to get path of executable from directories with no read permission is because it didn't search for file
+but it check if the file present in one of the dirs in PATH like: test -f one_of_path/arg -a -x one_of_path/arg
+
+[nkpro@len0Gv ~]$ PATH=/tmp/home/nk/Dev/bin:/tmp/home/nk/Dev/bin/sudo:/tmp/home/nk/Dev/bin/user:/tmp/home/nk/Dev/bin/test
+[nkpro@len0Gv ~]$ /usr/sbin/tree /tmp/home -pughD --metafirst  
+[drwxr-xr-x nkpro    nkpro      60 Jul 27 14:10]  /tmp/home
+[drwxr-xr-x nkpro    nkpro      60 Jul 27 14:10]  └── nk
+[drwxr-xr-x nkpro    nkpro      60 Jul 27 14:10]      └── Dev
+[drwxr-xr-x nkpro    nkpro     120 Jul 27 14:11]          └── bin
+[-rwxr-xr-x nkpro    nkpro      22 Jul 27 14:11]              ├── hi.sh
+[d--x--x--x nkpro    nkpro      60 Jul 27 14:12]              ├── sudo  [error opening dir]
+[dr--r--r-- nkpro    nkpro      60 Jul 27 14:13]              ├── test
+[dr-xr-xr-x nkpro    nkpro      60 Jul 27 14:12]              └── user
+[-rwxr-xr-x nkpro    nkpro      23 Jul 27 14:12]                  └── user.sh
+6 directories, 2 files
+[nkpro@len0Gv ~]$ /usr/sbin/which hi.sh user.sh sudo.sh tesst.sh
+/tmp/home/nk/Dev/bin/hi.sh
+/tmp/home/nk/Dev/bin/user/user.sh
+/tmp/home/nk/Dev/bin/sudo/sudo.sh
+/usr/sbin/which: no tesst.sh in (/tmp/home/nk/Dev/bin:/tmp/home/nk/Dev/bin/sudo:/tmp/home/nk/Dev/bin/user:/tmp/home/nk/Dev/bin/test)
+[nkpro@len0Gv ~]$ /usr/sbin/comm -23 <(compgen -c | /usr/sbin/sort) <({ compgen -abk ; compgen -A function; } | /usr/sbin/sort)
+hi.sh
+user.sh
+[nkpro@len0Gv ~]$ /usr/sbin/sudo /usr/sbin/which hi.sh user.sh sudo.sh tesst.sh
+[sudo] password for nkpro: 
+/tmp/home/nk/Dev/bin/hi.sh
+/tmp/home/nk/Dev/bin/user/user.sh
+/tmp/home/nk/Dev/bin/sudo/sudo.sh
+/tmp/home/nk/Dev/bin/test/tesst.sh
+[nkpro@len0Gv ~]$ /usr/sbin/su
+Password: 
+[len0Gv nkpro]# /usr/sbin/comm -23 <(compgen -c | /usr/sbin/sort) <({ compgen -abk ; compgen -A function; } | /usr/sbin/sort)
+hi.sh
+sudo.sh
+tesst.sh
+user.sh
+[len0Gv nkpro]# 
+exit
+[nkpro@len0Gv ~]$ 
+
+compgen unable to get sudo.sh but which command can, because to view all files in dir requires read permission which sudo/ dir
+didn't have but which command requires only x permission
+
+
+https://unix.stackexchange.com/questions/501329/why-source-or-dot-command-doesnt-require-the-file-to-be-executable
+
+
+https://superuser.com/questions/303040/how-do-file-permissions-apply-to-symlinks/1188707#1188707
+
+
