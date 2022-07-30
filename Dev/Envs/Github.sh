@@ -17,7 +17,7 @@ ghs () { # GitHub Ssh
             'git@github.com:'*)
                 ;; # Already using ssh
             'https://github.com/'*)
-                remote_url="git@github.com:$(echo "$remote_url" | cut -d\/ -f4-)"
+                remote_url="git@github.com:$(echo "$remote_url" | cut -d'/' -f4-)"
                 ;;
             *)
                 echo 'Unknown method on remote url'
@@ -30,16 +30,13 @@ ghs () { # GitHub Ssh
     # setting remote url
     git remote set-url --push origin "$remote_url"
 
-    #$ sudo tree ~/nk/Dev/.ssh -p --metafirst                                    
+    #$ sudo tree ~/nk/Dev/.ssh -p --metafirst
     #[d--x------]  ~/nk/Dev/.ssh
     #[-r--------]  ├── gh_*
     #[-r--------]  └── gh_*.pub
-    mv -f "${HOME}/.ssh/config" "${HOME}/.ssh/config_backup" 2>/dev/null || :
-    echo Host github.com > "${HOME}/.ssh/config"
-    printf '\tIdentityFile %s\n' "${HOME}/nk/Dev/.ssh/gh_$1" >> "${HOME}/.ssh/config"
-
-    echo "$2" | xargs git
-
-    rm "${HOME}/.ssh/config"
-    mv -f "${HOME}/.ssh/config_backup" "${HOME}/.ssh/config" 2>/dev/null || :
+    if test -n "$2"; then
+        (export GIT_SSH_COMMAND='ssh -i '"${HOME}/nk/Dev/.ssh/gh_$1"' -o IdentitiesOnly=yes'; echo "$2" | xargs git)
+    else
+        (export GIT_SSH_COMMAND='ssh -i '"${HOME}/nk/Dev/.ssh/gh_$1"' -o IdentitiesOnly=yes'; git push origin master)
+    fi
 }
