@@ -1,0 +1,25 @@
+
+
+# first two lines are genereated by ~/nk/Dev/bin/.generate
+# 1st line : paths to add in PATH at initial login shell (profile)
+# 2nd line : paths to update in PATH at each shell (rc files)
+####################### Don't touch first two lines.
+## Add paths to add in PATH
+# Format:
+#|p                   : profile only (will be excluded at each shell by rc files)
+#|r                   : rc file only (will not be included at login shell)
+#|b                   : in both (will persist at each shell. not exclude by rc files)
+#|#                   : to comment
+# use 'p' if needed to be excluded on each shell but remains at login shell
+# other wise always use 'b' for paths to be initialized even at login shell.
+# use 'r' to only include at each shell by rc files.
+#|  path_to_file      : I don't know what will happed, anyways added to PATH
+#|  path_to_directory : add to PATH (path can be relative to ~/nk/Dev/bin/)
+# example :
+# i/commented/this/dir/path
+# another/dir/path
+####################### Don't edit above lines. Insert paths from below (from 22nd line)
+r code
+r flutter
+# .
+# /tmp/bins

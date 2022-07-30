@@ -8,38 +8,12 @@ nk_profile="${HOME}/nk/Setup/Sh/nk-profile.sh"
 
 ## Adding nk/Dev bin and sub bins to PATH
 ##########################################
-nk_profile_path="${HOME}/nk/Dev/bin"
+if test -f "${HOME}/nk/Dev/bin/.path" -a -r "${HOME}/nk/Dev/bin/.path"; then
+# write and execute permission is not needed on ~/nk/Dev/bin/.path,
+# since this script not intended to edit or execute it.
 
-if test -d "${HOME}/nk/Dev/bin" -a -r "${HOME}/nk/Dev/bin" -a -x "${HOME}/nk/Dev/bin"; then
-# write permission is not needed on ~/nk/Dev/bin/, since this script not intended to create a new
-#   file or directory in ~/nk/Dev/bin/.
-
-    for nk_profile_fd in "${HOME}/nk/Dev/bin/"*; do # needed read permission on ~/nk/Dev/bin/
-        if test -d "$nk_profile_fd" -a -x "$nk_profile_fd"; then # needed executable permission on ~/nk/Dev/bin/
-        # write permission is not needed on "$nk_profile_fd", for the same reason as ~/nk/Dev/bin/.
-        #TODO read, x - sudo
-        #TODO remove x perm test and use cd for test -L file only
-
-            nk_profile_exclude='False'
-            if test -f "${HOME}/nk/Dev/bin/.exclude_in_profile" -a -r "${HOME}/nk/Dev/bin/.exclude_in_profile"; then
-            #TODO why not include_in_profile, so not required read perm on ~/nk/Dev/bin/, since no gloging just matching
-            # write and executable permission are not needed as it is not intended.
-                while IFS= read -r nk_profile_ep; do
-                    if test "$nk_profile_fd" = "${HOME}/nk/Dev/bin/$nk_profile_ep"; then
-                        nk_profile_exclude='True'
-                        break
-                    fi
-                done < "${HOME}/nk/Dev/bin/.exclude_in_profile" # needed read permission on ~/nk/Dev/bin/.exclude_in_profile
-            fi
-            if test "$nk_profile_exclude" = 'False'; then
-                nk_profile_path="${nk_profile_path}:$(cd "$nk_profile_fd" && pwd -P)"; # needed executable permission on "$nk_profile_fd"
-            fi
-
-        fi
-    done
-    unset nk_profile_exclude
-    unset nk_profile_ep
-    unset nk_profile_fd
+    read -r nk_profile_path < "${HOME}/nk/Dev/bin/.path" # first line is profile path
+    #                        needed read permission on ~/nk/Dev/bin/.path
 
     #case "${PATH}" in # just in case
     #    "${nk_profile_path}"*)
@@ -54,8 +28,6 @@ if test -d "${HOME}/nk/Dev/bin" -a -r "${HOME}/nk/Dev/bin" -a -x "${HOME}/nk/Dev
     export PATH
 
 fi
-
-unset nk_profile_path
 
 
 ## Adding nk/.53c2375 Secrets to ENV
