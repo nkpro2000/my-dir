@@ -12,20 +12,23 @@ if test -f "${HOME}/nk/Dev/bin/.path" -a -r "${HOME}/nk/Dev/bin/.path"; then
 # write and execute permission is not needed on ~/nk/Dev/bin/.path,
 # since this script not intended to edit or execute it.
 
-    read -r nk_profile_path < "${HOME}/nk/Dev/bin/.path" # first line is profile path
+    IFS= read -r nk_profile_path < "${HOME}/nk/Dev/bin/.path" # first line is profile path
     #                        needed read permission on ~/nk/Dev/bin/.path
 
-    #case "${PATH}" in # just in case
-    #    "${nk_profile_path}"*)
+    if test -n "${nk_profile_path}"; then
 
-    # Present anywhere in PATH is OK
-    case ":${PATH}:" in # just in case
-        *":${nk_profile_path}:"*)
-            ;;
-        *)
-            PATH="${nk_profile_path}${PATH:+:$PATH}"
-    esac
-    export PATH
+        #case "${PATH}" in # just in case
+        #    "${nk_profile_path}"*)
+
+        # Present anywhere in PATH is OK
+        case ":${PATH}:" in # just in case
+            *":${nk_profile_path}:"*)
+                ;;
+            *)
+                export PATH="${nk_profile_path}${PATH:+:$PATH}"
+        esac
+
+    fi
 
 fi
 
