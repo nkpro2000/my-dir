@@ -4,7 +4,7 @@
 # shellcheck shell=sh
 
 ghs () { # GitHub Ssh
-    # add the ssh used for git temprarily for single git command
+    # add the ssh used for git temporarily for single git command
     # usage: ghs FILENAME 'COMMAND'
     # for using ~/nk/Dev/.ssh/gh_FILENAME as ssh key file
     # and executing git COMMAND
