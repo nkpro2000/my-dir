@@ -1,7 +1,38 @@
+#! /bin/bash
 # This generates the PATH for profile and shellrcs.
 # This script only edits first two lines of ~/nk/Dev/bin/.path .
 # Which then used by ~/nk/Setup/Sh/nk-{pro,rc}file.sh for updating PATH.
 
-# shellcheck shell=sh
+profile_path=''
+rcfiles_path=''
 
-#TODO
+while IFS= read -r -u3 path || [[ -n "$path" ]]; do
+
+    case "$path" in
+        'p '*)
+            profile_path+="${profile_path:+:}${path#p\ }"
+            # https://stackoverflow.com/a/2059833
+            ;;
+        'r '*)
+            rcfiles_path+="${rcfiles_path:+:}${path#r\ }"
+            ;;
+        'b '*)
+            profile_path+="${profile_path:+:}${path#b\ }"
+            rcfiles_path+="${rcfiles_path:+:}${path#b\ }"
+            ;;
+        '# '*|''|'#'*)
+            ;;
+        *)
+            echo "${path}"
+            echo "Not in required regex pattern '^[prb#] .*$' OR '^$' OR '^#.*$'"
+            exit 1
+            ;;
+    esac
+
+done 3< <(tail -n +22 ~/nk/Dev/bin/.path)
+# https://stackoverflow.com/a/10929511
+
+dot_path_content="$(tail -n +3 ~/nk/Dev/bin/.path)"
+echo "${profile_path}" > ~/nk/Dev/bin/.path
+echo "${rcfiles_path}" >> ~/nk/Dev/bin/.path
+echo -n "${dot_path_content}" >> ~/nk/Dev/bin/.path
