@@ -8,6 +8,8 @@ nk_profile="${HOME}/nk/Setup/Sh/nk-profile.sh"
 
 ## Adding nk/Dev bin and sub bins to PATH
 ##########################################
+export NK_PROFILE_RETURN='[1,1,1]'
+NK_PROFILE_RETURN_1='0'
 if test -f "${HOME}/nk/Dev/bin/.path" -a -r "${HOME}/nk/Dev/bin/.path"; then
 # write and execute permission is not needed on ~/nk/Dev/bin/.path,
 # since this script not intended to edit or execute it.
@@ -15,22 +17,29 @@ if test -f "${HOME}/nk/Dev/bin/.path" -a -r "${HOME}/nk/Dev/bin/.path"; then
     IFS= read -r nk_profile_path < "${HOME}/nk/Dev/bin/.path" # first line is profile path
     #                        needed read permission on ~/nk/Dev/bin/.path
 
+    NK_PROFILE_RETURN_1='[1]'
+    NK_PROFILE_RETURN_1_1='0'
     if test -n "${nk_profile_path}"; then
 
+        NK_PROFILE_RETURN_1_1='[1]'
+        NK_PROFILE_RETURN_1_1_1='0'
         #case "${PATH}" in # just in case
         #    "${nk_profile_path}"*)
 
         # Present anywhere in PATH is OK
         case ":${PATH}:" in # just in case
             *":${nk_profile_path}:"*)
+                NK_PROFILE_RETURN_1_1_1='1'
                 ;;
             *)
                 export PATH="${nk_profile_path}${PATH:+:$PATH}"
-        esac
+        esac; NK_PROFILE_RETURN_1_1="[${NK_PROFILE_RETURN_1_1_1}]"
 
-    fi
+    else NK_PROFILE_RETURN_1_1='1'
+    fi; NK_PROFILE_RETURN_1="[${NK_PROFILE_RETURN_1_1}]"
 
-fi
+else NK_PROFILE_RETURN_1='1'
+fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},1,1]"
 
 
 ## Adding nk/.53c2375 Secrets to ENV
@@ -40,17 +49,20 @@ fi
 # Eg: adding ~/nk/.53c2375 to PYTHONPATH by adding it in ~/nk/Setup/Sh/Envs/PYTHONPATH.sh
 
 
-## Adding Environmenal Variables
-#################################
+## Adding Environmental Variables
+##################################
 
+NK_PROFILE_RETURN_2='0'
 if test -f "${HOME}/nk/Setup/Sh/Envs.sh" -a -r "${HOME}/nk/Setup/Sh/Envs.sh"; then
 # write permission is not needed, since writing to this file is not required.
 # execute permission is not needed, since using . not executing script
 ## . just Read and execute commands from FILENAME in the current shell.
     # shellcheck disable=SC1091
     . "${HOME}/nk/Setup/Sh/Envs.sh" # needed read permission on ~/nk/Setup/Sh/Envs.sh
-fi
+else NK_PROFILE_RETURN_2='1'
+fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},${NK_PROFILE_RETURN_2},1]"
 
+NK_PROFILE_RETURN_3='0'
 if test -d "${HOME}/nk/Setup/Sh/Envs" -a -r "${HOME}/nk/Setup/Sh/Envs" -a -x "${HOME}/nk/Setup/Sh/Envs"; then
 # write permission is not needed on ~/nk/Setup/Sh/Envs/, since this script not intended to create a new
 #   file or directory in ~/nk/Setup/Sh/Envs/.
@@ -64,7 +76,8 @@ if test -d "${HOME}/nk/Setup/Sh/Envs" -a -r "${HOME}/nk/Setup/Sh/Envs" -a -x "${
     done
     unset nk_profile_sc
 
-fi
+else NK_PROFILE_RETURN_3='1'
+fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},${NK_PROFILE_RETURN_2},${NK_PROFILE_RETURN_3}]"
 
 
 

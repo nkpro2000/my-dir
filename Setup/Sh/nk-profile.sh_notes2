@@ -1,0 +1,173 @@
+# how to initialize variables for NK_PROFILE_RETURN
+
+# shellcheck shell=sh
+
+export RTN='[1,1,1]'
+rtn_1='0'
+if :; then
+
+    rtn_1='[1,1,1,1]'
+    rtn_1_1='0'
+    if :; then
+
+        rtn_1_1='[1,1,1]'
+        rtn_1_1_1='0'
+        if :; then
+        :
+        else rtn_1_1_1='1'
+        fi; rtn_1_1="[${rtn_1_1_1},1,1]"
+
+        rtn_1_1_2='0'
+        if :; then
+        :
+        else rtn_1_1_2='1'
+        fi; rtn_1_1="[${rtn_1_1_1},${rtn_1_1_2},1]"
+
+        rtn_1_1_3='0'
+        if :; then
+        :
+        else rtn_1_1_3='1'
+        fi; rtn_1_1="[${rtn_1_1_1},${rtn_1_1_2},${rtn_1_1_3}]"
+
+    else rtn_1_1='1'
+    fi; rtn_1="[${rtn_1_1},1,1,1]"
+
+    rtn_1_2='0'
+    if :; then
+
+        rtn_1_2='[1,1]'
+        rtn_1_2_1='0'
+        if :; then
+
+            rtn_1_2_1='[1]'
+            rtn_1_2_1_1='0'
+            if :; then
+            :
+            else rtn_1_2_1_1='1'
+            fi; rtn_1_2_1="[${rtn_1_2_1_1}]"
+
+        else rtn_1_2_1='1'
+        fi; rtn_1_2="[${rtn_1_2_1},1]"
+
+        rtn_1_2_2='0'
+        if :; then
+        :
+        else rtn_1_2_2='1'
+        fi; rtn_1_2="[${rtn_1_2_1},${rtn_1_2_2}]"
+
+    else rtn_1_2='1'
+    fi; rtn_1="[${rtn_1_1},${rtn_1_2},1,1]"
+
+    rtn_1_3='0'
+    if :; then
+
+        rtn_1_3='[1]'
+        rtn_1_3_1='0'
+        if :; then
+
+            rtn_1_3_1='[1]'
+            rtn_1_3_1_1='0'
+            if :; then
+
+                rtn_1_3_1_1='[1]'
+                rtn_1_3_1_1_1='0'
+                if :; then
+                :
+                else rtn_1_3_1_1_1='1'
+                fi; rtn_1_3_1_1="[${rtn_1_3_1_1_1}]"
+
+            else rtn_1_3_1_1='1'
+            fi; rtn_1_3_1="[${rtn_1_3_1_1}]"
+
+        else rtn_1_3_1='1'
+        fi; rtn_1_3="[${rtn_1_3_1}]"
+
+    else rtn_1_3='1'
+    fi; rtn_1="[${rtn_1_1},${rtn_1_2},${rtn_1_3},4]"
+
+    rtn_1_4='0'
+    if :; then
+    :
+    else rtn_1_4='1'
+    fi; rtn_1="[${rtn_1_1},${rtn_1_2},${rtn_1_3},${rtn_1_4}]"
+
+else rtn_1='1'
+fi; RTN="[${rtn_1},1,1]"
+
+rtn_2='0'
+if :; then
+
+    if :; then
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+    else :
+    fi
+
+    if :; then
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+    else :
+    fi
+
+    if :; then
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+        if :; then
+        :
+        else :
+        fi
+
+    else :
+    fi
+
+:
+else rtn_2='1'
+fi; RTN="[${rtn_1},${rtn_2},1]"
+
+rtn_3='0'
+if :; then
+
+    for _ in $(seq 5); do
+    :
+    done
+
+:
+else rtn_3='1'
+fi; RTN="[${rtn_1},${rtn_2},${rtn_3}]"
