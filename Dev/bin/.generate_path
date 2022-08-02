@@ -1,0 +1,7 @@
+# This generates the PATH for profile and shellrcs.
+# This script only edits first two lines of ~/nk/Dev/bin/.path .
+# Which then used by ~/nk/Setup/Sh/nk-{pro,rc}file.sh for updating PATH.
+
+# shellcheck shell=sh
+
+#TODO

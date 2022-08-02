@@ -13,6 +13,8 @@
 │   :
 ├── Dev/
 │   ├── bin/
+│   │   ├── .path
+│   │   ├── .generate_path
 │   │   ├── code -> ../code/bin/
 │   │   :
 │   ├── code -> <any_code_editor>/
@@ -25,6 +27,8 @@
 │   │   ├── data -> ../code-data/ (for Portable Mode)
 │   │   :
 │   ├── Envs/
+│   │   ├── Github.sh
+│   │   ├── Python.sh
 │   │   :
 │   ├── jupyter/
 │   │   ├── config/
@@ -37,7 +41,7 @@
 │   :
 ├── nk.py
 ├── Setup/
-│   ├── Panel/
+│   ├── Panel/ #TODO rename Pannel to Panel in both repo and local dir
 │   │   ├── Scripts/
 │   │   │   :
 │   │   :
@@ -45,8 +49,11 @@
 │   │   ├── zm_nk-profile.sh
 │   │   ├── nk-profile.sh
 │   │   ├── nk-profile.sh_notes
+│   │   ├── nk-profile.sh_notes2
+│   │   ├── nk-rcfile.sh
 │   │   ├── Envs.sh
 │   │   ├── Envs/
+│   │   │   ├── PYTHONPATH.sh
 │   │   │   :
 │   │   :
 │   :
@@ -163,23 +170,8 @@ if os.path.isfile(NK_PROFILE_PATH):
 else:
     os.system(f'sudo cp {NK_PROFILE_FILE} {NK_PROFILE_PATH}')
 
-# Adding excluded nk/Dev bin and sub bins to PATH
-##################################################
-
-#TODO
-
-# Adding excluded vars in Envs.sh to shell rc files
-####################################################
-
-#TODO
-
-# Adding excluded vars in Envs/*.sh to shell rc files
-######################################################
-
-#TODO
-
-# Adding Dev related envs like functions/aliases to shell rc files
-###################################################################
+# Adding nk-rcfile
+###################
 
 #TODO
 
