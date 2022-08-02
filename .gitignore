@@ -1,8 +1,10 @@
+# Not to upload other secrets [secret5.{sh,py} will not be ignored since it is already tracked]
+/.53c2375/**
 # Some other assets (Like icons used for panel widgets)
 /.assets/.others/
 # It is populated
-/Dev/code-data/
-/Dev/lobby/
+/Dev/code-data/**
+/Dev/lobby/**
 /Dev/jupyter/
 # Not to upload
 /Dev/.ssh/
@@ -39,17 +41,19 @@ __pycache__/
 
 
 ## Testing repo
-# ~/.../Lobby/my-dir >>> git ls-files | column                           ±[master]
+# ~/nk >>> git ls-files | column                                      ±[●][master]
 # .53c2375/secret5.py                     Dev/code
 # .53c2375/secret5.sh                     Dev/code-data/.gitkeep
 # .assets/NK.ico                          Dev/lobby/.gitkeep
 # .assets/NK.png                          Setup/Pannel/Scripts/.gitkeep
 # .assets/nk.ico                          Setup/Sh/Envs.sh
 # .assets/nk.png                          Setup/Sh/Envs/PYTHONPATH.sh
-# Dev/<any_code_editor>/bin/.gitkeep      Setup/Sh/nk-profile.sh
-# Dev/<any_code_editor>/data              Setup/Sh/nk-profile.sh_notes
-# Dev/Envs/Github.sh                      Setup/Sh/zm_nk-profile.sh
-# Dev/Envs/Python.sh                      nk.py
+# .gitignore                              Setup/Sh/nk-profile.sh
+# Dev/<any_code_editor>/bin/.gitkeep      Setup/Sh/nk-profile.sh_notes
+# Dev/<any_code_editor>/data              Setup/Sh/nk-profile.sh_notes2
+# Dev/Envs/Github.sh                      Setup/Sh/nk-rcfile.sh
+# Dev/Envs/Python.sh                      Setup/Sh/zm_nk-profile.sh
+# Dev/bin/.generate_path                  nk.py
 # Dev/bin/.path                           setup-nk.py
 # Dev/bin/code
 
@@ -76,6 +80,7 @@ __pycache__/
 # ./Dev/bin/
 # ./Dev/bin/.path
 # ./Dev/bin/code
+# ./Dev/bin/.generate_path
 # ./Dev/code
 # find: ‘./Dev/.ssh’: Permission denied
 # ./Dev/code-data/
@@ -86,6 +91,7 @@ __pycache__/
 # ./Setup/
 # ./Setup/Sh/
 # ./Setup/Sh/zm_nk-profile.sh
+# ./Setup/Sh/nk-rcfile.sh
 # ./Setup/Sh/nk-profile.sh
 # ./Setup/Sh/nk-profile.sh_notes
 # ./Setup/Sh/Envs/
