@@ -33,10 +33,12 @@ if test -f "${HOME}/nk/Dev/bin/.path" -a -r "${HOME}/nk/Dev/bin/.path"; then
                 ;;
             *)
                 export PATH="${nk_profile_path}${PATH:+:$PATH}"
-        esac; NK_PROFILE_RETURN_1_1="[${NK_PROFILE_RETURN_1_1_1}]"
+        esac; NK_PROFILE_RETURN_1_1="[${NK_PROFILE_RETURN_1_1_1}]"; unset NK_PROFILE_RETURN_1_1_1
 
     else NK_PROFILE_RETURN_1_1='1'
-    fi; NK_PROFILE_RETURN_1="[${NK_PROFILE_RETURN_1_1}]"
+    fi; NK_PROFILE_RETURN_1="[${NK_PROFILE_RETURN_1_1}]"; unset NK_PROFILE_RETURN_1_1
+
+    unset nk_profile_path
 
 else NK_PROFILE_RETURN_1='1'
 fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},1,1]"
@@ -81,4 +83,4 @@ fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},${NK_PROFILE_RETURN_2},${NK_PROFI
 
 
 
-unset nk_profile
+unset nk_profile NK_PROFILE_RETURN_1 NK_PROFILE_RETURN_2 NK_PROFILE_RETURN_3
