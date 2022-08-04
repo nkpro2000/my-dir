@@ -8,17 +8,20 @@ rcfiles_path=''
 
 while IFS= read -r -u3 path || [[ -n "$path" ]]; do
 
+    if [[ "$path" =~ ^[prb]\  ]]; then
+        real_path="$(realpath "${HOME}/nk/Dev/bin/${path#?\ }" || echo "${HOME}/nk/Dev/bin/${path#?\ }")"
+        # https://stackoverflow.com/a/2059833
+    fi
     case "$path" in
         'p '*)
-            profile_path+="${profile_path:+:}${path#p\ }"
-            # https://stackoverflow.com/a/2059833
+            profile_path+="${profile_path:+:}${real_path}"
             ;;
         'r '*)
-            rcfiles_path+="${rcfiles_path:+:}${path#r\ }"
+            rcfiles_path+="${rcfiles_path:+:}${real_path}"
             ;;
         'b '*)
-            profile_path+="${profile_path:+:}${path#b\ }"
-            rcfiles_path+="${rcfiles_path:+:}${path#b\ }"
+            profile_path+="${profile_path:+:}${real_path}"
+            rcfiles_path+="${rcfiles_path:+:}${real_path}"
             ;;
         '# '*|''|'#'*)
             ;;
