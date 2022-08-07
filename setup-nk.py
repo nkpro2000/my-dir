@@ -172,8 +172,74 @@ else:
 
 # Adding nk-rcfile
 ###################
+## https://unix.stackexchange.com/a/44619
 
-#TODO
+SHELLRC_NKRCFILE_DIV_PATTERN = re.compile('''
+#nk-rcfile\{
+[\s\S]*?
+#nk-rcfile}
+''')
+
+# bash
+BASHRC = HOME_DIR + '.bashrc'
+BASHRC_NKRCFILE_DIV = '''
+#nk-rcfile{
+. "$HOME"/nk/Setup/Sh/nk-rcfile.sh
+#nk-rcfile}
+'''
+if os.path.isfile(BASHRC):
+    with open(BASHRC, 'r') as file:
+        bashrc = file.read()
+
+    if m:=SHELLRC_NKRCFILE_DIV_PATTERN.search(bashrc):
+        if m.group(0) == BASHRC_NKRCFILE_DIV:
+            print('I> Already Added nk-rcfile to ~/.bashrc')
+        else:
+            with open(BASHRC, 'w') as file:
+                file.write(
+                    SHELLRC_NKRCFILE_DIV_PATTERN.sub(
+                        BASHRC_NKRCFILE_DIV, bashrc
+                    )
+                )
+    else:
+        with open(BASHRC, 'w') as file:
+            file.write(bashrc)
+            file.write(BASHRC_NKRCFILE_DIV)
+
+# zsh
+ZSHRC = HOME_DIR + '.zshrc'
+ZSHRC_NKRCFILE_DIV = '''
+#nk-rcfile{
+emulate sh -c 'source '"$HOME"'/nk/Setup/Sh/nk-rcfile.sh'
+#nk-rcfile}
+'''
+if os.path.isfile(ZSHRC):
+    with open(ZSHRC, 'r') as file:
+        zshrc = file.read()
+
+    if m:=SHELLRC_NKRCFILE_DIV_PATTERN.search(zshrc):
+        if m.group(0) == ZSHRC_NKRCFILE_DIV:
+            print('I> Already Added nk-rcfile to ~/.zshrc')
+        else:
+            with open(ZSHRC, 'w') as file:
+                file.write(
+                    SHELLRC_NKRCFILE_DIV_PATTERN.sub(
+                        ZSHRC_NKRCFILE_DIV, zshrc
+                    )
+                )
+    else:
+        with open(ZSHRC, 'w') as file:
+            file.write(zshrc)
+            file.write(ZSHRC_NKRCFILE_DIV)
+
+# fish
+## Skip. fish is intentionally not fully POSIX compliant
+
+# dash
+## No rc file. https://unix.stackexchange.com/a/565908 https://askubuntu.com/a/86143
+
+# Others
+## Yet to learn
 
 # Setting CONFIG & DATA dir for Jupyter
 ########################################
