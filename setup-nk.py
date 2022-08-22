@@ -59,7 +59,7 @@
 │   :
 ├── setup-nk.py
 :
-"""
+""" #TODO https://stackoverflow.com/questions/3207728/retaining-file-permissions-with-git
 
 import re
 import os
