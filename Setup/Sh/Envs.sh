@@ -16,17 +16,22 @@ export ANDROID_HOME=/opt/android-sdk
 export CHROME_EXECUTABLE=/opt/google/chrome/google-chrome
 #flutter}
 
-#darling{
-#export DPREFIX=/run/media/nkpro/Extended/darling/nkpro/.darling
-#darling}
-
 
 ## Envs needed to be loaded on non-login shell
 ### Above Envs always loaded
 else
 
+#$ sudo tree /mnt/Extended/LinuxExtRoot -pug --metafirst
+# [drwxr-xr-x root  root ]  /mnt/Extended/LinuxExtRoot
+# [drwxr-xr-x root  root ]  ├── home
+# [drwx------ nkpro nkpro]  │   └── nkpro
+# [drwxrwxrwt root  root ]  └── thome
+# [drwx------ nkpro nkpro]      ├── nkpro_darling
+# [drwx------ nkpro nkpro]      ├── nkpro_droid
+# [drwx------ nkpro nkpro]      └── nkpro_wine
+
 #darling{
-export DPREFIX=/run/media/nkpro/Extended/darling/nkpro/.darling
+export DPREFIX="/mnt/Extended/LinuxExtRoot/thome/${USER}_darling/.darling"
 #darling}
 
 
