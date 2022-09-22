@@ -84,8 +84,8 @@ with open(USER_PLACES, 'r') as user_places:
 
 home_place = PLACE_PATTERN.search(places)
 nk_place = FILE_PATTERN.sub('href="file://{}">'.format(NK_DIR), home_place[0])
-nk_place = TITLE_PATTERN.sub('<title>NK</', nk_place)
-nk_place = ICON_PATTERN.sub('icon name="{}"/>'.format(NK_DIR + '.assets/nk.ico'), nk_place)
+nk_place = TITLE_PATTERN.sub('<title>NewK</', nk_place)
+nk_place = ICON_PATTERN.sub('icon name="{}"/>'.format(NK_DIR + '.assets/NewK.ico'), nk_place)
 home_id = ID_PATTERN.findall(home_place[0])[0]
 nk_place = ID_PATTERN.sub('<ID>{}</'.format(home_id+'0'), nk_place)
 nk_place = SYSTEM_PATTERN.sub('<isSystemItem>false</', nk_place)
