@@ -126,7 +126,7 @@ __pycache__/
 # O ./Dev/lobby/
 # X ./Dev/lobby/if_have_some_file
 # O ./Dev/lobby/.gitkeep
-# X ./Dev/.ssh/
+# X ./Dev/.ssh/                        (Possibly:: find: ‘./Dev/.ssh’: Permission denied)
 # X ./Dev/.ssh/if_have_some_file
 # X ./.directory
 # X ./Engg/
@@ -149,14 +149,6 @@ __pycache__/
 # X ./Pbco/somefile
 # X ./.pytest_cache/
 # X ./.pytest_cache/if_have_some_file
-# X ./.pytest_cache/CACHEDIR.TAG
-# X ./.pytest_cache/.gitignore
-# X ./.pytest_cache/README.md
-# X ./.pytest_cache/v/
-# X ./.pytest_cache/v/if_have_some_file
-# X ./.pytest_cache/v/cache/
-# X ./.pytest_cache/v/cache/if_have_some_file
-# X ./.pytest_cache/v/cache/stepwise
 # X ./Sbco/
 # X ./Sbco/if_have_some_file
 # X ./Sbco/somefile
