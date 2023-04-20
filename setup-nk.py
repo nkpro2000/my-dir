@@ -72,6 +72,7 @@
 │   :
 ├── nk.py
 ├── setup-nk.py
+├── .directory
 :
 """ #TODO https://stackoverflow.com/questions/3207728/retaining-file-permissions-with-git
 
@@ -118,6 +119,7 @@ else:
 # Setting folder icon for ~/nk/Dev
 ###################################
 
+NK_DIR_FILE = NK_DIR + '.directory'
 DEV_DIR_FILE = NK_DIR + 'Dev/.directory'
 NOTES_DIR_FILE = NK_DIR + 'Notes/.directory'
 SETUP_DIR_FILE = NK_DIR + 'Setup/.directory'
@@ -170,12 +172,14 @@ def set_folder_icon (dir_file_path, icon_path):
         with open(dir_file_path, 'w') as dir_file:
             dir_file.write('[Desktop Entry]\nIcon={}\n'.format(NK_DIR + '.assets/'+icon_path))
 
+NK_ICON = 'NewK.ico'
 #DEV_ICON = 'NK.ico'
 DEV_ICON = 'Dev.ico'
 NOTES_ICON = 'Notes.ico'
 SETUP_ICON = 'nk_.ico'
 #SETUP_ICON = 'nk.ico'
 
+set_folder_icon(NK_DIR_FILE, NK_ICON)
 set_folder_icon(DEV_DIR_FILE, DEV_ICON)
 set_folder_icon(NOTES_DIR_FILE, NOTES_ICON)
 set_folder_icon(SETUP_DIR_FILE, SETUP_ICON)
