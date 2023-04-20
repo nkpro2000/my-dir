@@ -3,6 +3,8 @@
 
 # shellcheck shell=sh
 
+#TODO these functions are not specific to linux, better move to cross-platform scripts
+
 pyvenv () {
     if test "$1" = '-t'; then
         python -m venv --copies --clear --upgrade-deps --prompt PYtenv /tmp/.pyvenv

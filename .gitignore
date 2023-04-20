@@ -11,6 +11,8 @@
 # Tools for Dev
 /Dev/bin/flutter
 /Dev/VSCode-linux-x64/
+# Better to be in local
+/Notes/*
 # May upload in other repos
 /Setup/Panel/Scripts/**
 
@@ -42,64 +44,143 @@ __pycache__/
 
 ## Testing repo
 # ~/nk >>> git ls-files | column                                      ±[●][master]
-# .53c2375/secret5.py                     Dev/code
-# .53c2375/secret5.sh                     Dev/code-data/.gitkeep
-# .assets/NK.ico                          Dev/lobby/.gitkeep
-# .assets/NK.png                          Setup/Panel/Scripts/.gitkeep
-# .assets/nk.ico                          Setup/Sh/Envs.sh
-# .assets/nk.png                          Setup/Sh/Envs/PYTHONPATH.sh
-# .gitignore                              Setup/Sh/nk-profile.sh
-# Dev/<any_code_editor>/bin/.gitkeep      Setup/Sh/nk-profile.sh_notes
-# Dev/<any_code_editor>/data              Setup/Sh/nk-profile.sh_notes2
-# Dev/Envs/Github.sh                      Setup/Sh/nk-rcfile.sh
-# Dev/Envs/Python.sh                      Setup/Sh/zm_nk-profile.sh
-# Dev/bin/.generate_path                  nk.py
-# Dev/bin/.path                           setup-nk.py
-# Dev/bin/code
+# .53c2375/secret5.py                     Dev/bin/.generate_path
+# .53c2375/secret5.sh                     Dev/bin/.path
+# .assets/Dev.ico                         Dev/bin/code
+# .assets/Dev.png                         Dev/code
+# .assets/NK.ico                          Dev/code-data/.gitkeep
+# .assets/NK.png                          Dev/lobby/.gitkeep
+# .assets/NewK.ico                        Notes/.gitkeep
+# .assets/Notes.ico                       Setup/Panel/Scripts/.gitkeep
+# .assets/Notes.png                       Setup/Sh/Envs.sh
+# .assets/nk.ico                          Setup/Sh/Envs/PYTHONPATH.sh
+# .assets/nk.png                          Setup/Sh/nk-profile.sh
+# .assets/nk_.ico                         Setup/Sh/nk-profile.sh_notes
+# .assets/nk_.png                         Setup/Sh/nk-profile.sh_notes2
+# .gitignore                              Setup/Sh/nk-rcfile.sh
+# Dev/<any_code_editor>/bin/.gitkeep      Setup/Sh/zm_nk-profile.sh
+# Dev/<any_code_editor>/data              nk.py
+# Dev/Envs/Github.sh                      setup-nk.py
+# Dev/Envs/Python.sh
 
 ## Testing .gitignore
-# ~/nk >>> find . -path './.git' -prune -o -type d -printf '%p/\n' -o -print | while IFS= read -r i; do
-# if git check-ignore -v "$i" 1>/dev/null; then :
-# else echo "$i"
-# fi
+# ~/nk >>> find . -path './.git' -prune -o -type d -printf '%p/\n' -o -print | sort | while if [ -z "$i" ]; then IFS= read -r i; fi; do
+# if git check-ignore -v "$i" 1>/dev/null; then tput setaf 1; echo X "$i"; else tput setaf 10; echo O "$i"; fi
+# if [[ $i =~ '/'$ ]]; then i="$i"'if_have_some_file'; else i=''; fi
 # done
-# ./
-# ./.assets/
-# ./.assets/NK.ico
-# ./.assets/nk.ico
-# ./.assets/NK.png
-# ./.assets/nk.png
-# ./setup-nk.py
-# ./nk.py
-# ./Dev/
-# ./Dev/lobby/
-# ./Dev/lobby/.gitkeep
-# ./Dev/Envs/
-# ./Dev/Envs/Python.sh
-# ./Dev/Envs/Github.sh
-# ./Dev/bin/
-# ./Dev/bin/.path
-# ./Dev/bin/code
-# ./Dev/bin/.generate_path
-# ./Dev/code
-# find: ‘./Dev/.ssh’: Permission denied
-# ./Dev/code-data/
-# ./Dev/code-data/.gitkeep
-# ./.53c2375/
-# ./.53c2375/secret5.sh
-# ./.53c2375/secret5.py
-# ./Setup/
-# ./Setup/Sh/
-# ./Setup/Sh/zm_nk-profile.sh
-# ./Setup/Sh/nk-rcfile.sh
-# ./Setup/Sh/nk-profile.sh
-# ./Setup/Sh/nk-profile.sh_notes
-# ./Setup/Sh/Envs/
-# ./Setup/Sh/Envs/PYTHONPATH.sh
-# ./Setup/Sh/Envs.sh
-# ./Setup/Sh/nk-profile.sh_notes2
-# ./Setup/Panel/
-# ./Setup/Panel/Scripts/
-# ./Setup/Panel/Scripts/.gitkeep
-# ./.gitignore
+# O ./
+# O ./if_have_some_file
+# O ./.53c2375/
+# X ./.53c2375/if_have_some_file
+# O ./.53c2375/secret5.py
+# O ./.53c2375/secret5.sh
+# O ./.assets/
+# O ./.assets/if_have_some_file
+# O ./.assets/Dev.ico
+# O ./.assets/Dev.png
+# O ./.assets/NewK.ico
+# O ./.assets/nk.ico
+# O ./.assets/nk_.ico
+# O ./.assets/NK.ico
+# O ./.assets/nk.png
+# O ./.assets/nk_.png
+# O ./.assets/NK.png
+# O ./.assets/Notes.ico
+# O ./.assets/Notes.png
+# X ./.assets/.others/
+# X ./.assets/.others/if_have_some_file
+# X ./Bored/
+# X ./Bored/if_have_some_file
+# X ./Bored/somefile
+# X ./CuWo/
+# X ./CuWo/if_have_some_file
+# X ./CuWo/somefile
+# X ./Desk/
+# X ./Desk/if_have_some_file
+# X ./Desk/somefile
+# O ./Dev/
+# O ./Dev/if_have_some_file
+# O ./Dev/<any_code_editor>/
+# O ./Dev/<any_code_editor>/if_have_some_file
+# O ./Dev/<any_code_editor>/bin/
+# O ./Dev/<any_code_editor>/bin/if_have_some_file
+# O ./Dev/<any_code_editor>/bin/.gitkeep
+# O ./Dev/<any_code_editor>/data
+# O ./Dev/bin/
+# O ./Dev/bin/if_have_some_file
+# O ./Dev/bin/code
+# O ./Dev/bin/.generate_path
+# O ./Dev/bin/.path
+# O ./Dev/code
+# O ./Dev/code-data/
+# X ./Dev/code-data/if_have_some_file
+# O ./Dev/code-data/.gitkeep
+# X ./Dev/.directory
+# O ./Dev/Envs/
+# O ./Dev/Envs/if_have_some_file
+# O ./Dev/Envs/Github.sh
+# O ./Dev/Envs/Python.sh
+# O ./Dev/Envs/Shell.sh
+# X ./Dev/jupyter/
+# X ./Dev/jupyter/if_have_some_file
+# O ./Dev/lobby/
+# X ./Dev/lobby/if_have_some_file
+# O ./Dev/lobby/.gitkeep
+# X ./Dev/.ssh/
+# X ./Dev/.ssh/if_have_some_file
+# X ./.directory
+# X ./Engg/
+# X ./Engg/if_have_some_file
+# X ./Engg/somefile
+# O ./.gitignore
+# X ./Lobby/
+# X ./Lobby/if_have_some_file
+# X ./Lobby/somefile
+# X ./.logs/
+# X ./.logs/if_have_some_file
+# X ./.logs/somefile
+# O ./nk.py
+# O ./Notes/
+# X ./Notes/if_have_some_file
+# X ./Notes/.directory
+# O ./Notes/.gitkeep
+# X ./Pbco/
+# X ./Pbco/if_have_some_file
+# X ./Pbco/somefile
+# X ./.pytest_cache/
+# X ./.pytest_cache/if_have_some_file
+# X ./.pytest_cache/CACHEDIR.TAG
+# X ./.pytest_cache/.gitignore
+# X ./.pytest_cache/README.md
+# X ./.pytest_cache/v/
+# X ./.pytest_cache/v/if_have_some_file
+# X ./.pytest_cache/v/cache/
+# X ./.pytest_cache/v/cache/if_have_some_file
+# X ./.pytest_cache/v/cache/stepwise
+# X ./Sbco/
+# X ./Sbco/if_have_some_file
+# X ./Sbco/somefile
+# O ./Setup/
+# O ./Setup/if_have_some_file
+# X ./Setup/.directory
+# O ./setup-nk.py
+# O ./Setup/Panel/
+# O ./Setup/Panel/if_have_some_file
+# O ./Setup/Panel/Scripts/
+# X ./Setup/Panel/Scripts/if_have_some_file
+# O ./Setup/Panel/Scripts/.gitkeep
+# O ./Setup/Sh/
+# O ./Setup/Sh/if_have_some_file
+# O ./Setup/Sh/Envs/
+# O ./Setup/Sh/Envs/if_have_some_file
+# O ./Setup/Sh/Envs/PYTHONPATH.sh
+# O ./Setup/Sh/Envs.sh
+# O ./Setup/Sh/nk-profile.sh
+# O ./Setup/Sh/nk-profile.sh_notes
+# O ./Setup/Sh/nk-profile.sh_notes2
+# O ./Setup/Sh/nk-rcfile.sh
+# O ./Setup/Sh/zm_nk-profile.sh
+# X ./Things/
+# X ./Things/if_have_some_file
+# X ./Things/somefile
 # ~/nk >>> 
