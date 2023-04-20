@@ -12,7 +12,7 @@
 /Dev/bin/flutter
 /Dev/VSCode-linux-x64/
 # May upload in other repos
-/Setup/Pannel/Scripts/**
+/Setup/Panel/Scripts/**
 
 ### My Coding Environment ###
 # DOLPHIN Directory metadata
@@ -45,7 +45,7 @@ __pycache__/
 # .53c2375/secret5.py                     Dev/code
 # .53c2375/secret5.sh                     Dev/code-data/.gitkeep
 # .assets/NK.ico                          Dev/lobby/.gitkeep
-# .assets/NK.png                          Setup/Pannel/Scripts/.gitkeep
+# .assets/NK.png                          Setup/Panel/Scripts/.gitkeep
 # .assets/nk.ico                          Setup/Sh/Envs.sh
 # .assets/nk.png                          Setup/Sh/Envs/PYTHONPATH.sh
 # .gitignore                              Setup/Sh/nk-profile.sh
@@ -98,8 +98,8 @@ __pycache__/
 # ./Setup/Sh/Envs/PYTHONPATH.sh
 # ./Setup/Sh/Envs.sh
 # ./Setup/Sh/nk-profile.sh_notes2
-# ./Setup/Pannel/
-# ./Setup/Pannel/Scripts/
-# ./Setup/Pannel/Scripts/.gitkeep
+# ./Setup/Panel/
+# ./Setup/Panel/Scripts/
+# ./Setup/Panel/Scripts/.gitkeep
 # ./.gitignore
 # ~/nk >>> 
