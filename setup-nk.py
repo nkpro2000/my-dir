@@ -1,62 +1,76 @@
 """ $ tree -aF ~/nk
 ~/nk/
 :
-├── .53c2375/
-│   ├── secret5.sh
-│   ├── secret5.py
-│   :
+├── .53c2375/       #TODO Think about better method to store secrets
+│   ├── secret5.sh
+│   ├── secret5.py
+│   :
 ├── .assets/
-│   ├── nk.ico
-│   ├── NK.ico
-│   ├── nk.png
-│   ├── NK.png
-│   :
+│   ├── NewK.ico
+│   ├── Dev.ico
+│   ├── Dev.png
+│   ├── Notes.ico
+│   ├── Notes.png
+│   ├── nk_.ico
+│   ├── nk_.png
+│   ├── .others/
+│   :
+├── .logs/
+│   :
 ├── Dev/
-│   ├── bin/
-│   │   ├── .path
-│   │   ├── .generate_path
-│   │   ├── code -> ../code/bin/
-│   │   :
-│   ├── code -> <any_code_editor>/
-│   │   :
-│   ├── code-data/
-│   │   :
-│   ├── <any_code_editor>/ (eg: VScodium)
-│   │   ├── bin/
-│   │   │   :
-│   │   ├── data -> ../code-data/ (for Portable Mode)
-│   │   :
-│   ├── Envs/
-│   │   ├── Github.sh
-│   │   ├── Python.sh
-│   │   :
-│   ├── jupyter/
-│   │   ├── config/
-│   │   │   :
-│   │   ├── data/
-│   │   │   :
-│   │   :
-│   ├── lobby/
-│   │   :
-│   :
-├── nk.py
+│   ├── .ssh/
+│   │   :
+│   ├── bin/
+│   │   ├── .path
+│   │   ├── .generate_path
+│   │   ├── code -> ../code/bin/
+│   │   :
+│   ├── code -> <any_code_editor>/
+│   │   :
+│   ├── code-data/
+│   │   :
+│   ├── <any_code_editor>/ (eg: VScodium)
+│   │   ├── bin/
+│   │   │   :
+│   │   ├── data -> ../code-data/ (for Portability)
+│   │   :
+│   ├── Envs/
+│   │   ├── Github.sh
+│   │   ├── Python.sh
+│   │   ├── Shell.sh
+│   │   :
+│   ├── jupyter/
+│   │   ├── config/
+│   │   │   :
+│   │   ├── data/
+│   │   │   :
+│   │   :
+│   ├── lobby/
+│   │   :
+│   ├── .directory
+│   :
+├── Notes/
+│   ├── .directory
+│   :
 ├── Setup/
-│   ├── Panel/ #TODO rename Pannel to Panel in both repo and local dir
-│   │   ├── Scripts/
-│   │   │   :
-│   │   :
-│   ├── Sh
-│   │   ├── zm_nk-profile.sh
-│   │   ├── nk-profile.sh
-│   │   ├── nk-profile.sh_notes
-│   │   ├── nk-profile.sh_notes2
-│   │   ├── nk-rcfile.sh
-│   │   ├── Envs.sh
-│   │   ├── Envs/
-│   │   │   ├── PYTHONPATH.sh
-│   │   │   :
-│   │   :
-│   :
+│   ├── Panel/
+│   │   ├── Scripts/
+│   │   │   :
+│   │   :
+│   ├── Sh
+│   │   ├── zm_nk-profile.sh
+│   │   ├── nk-profile.sh
+│   │   ├── nk-profile.sh_notes
+│   │   ├── nk-profile.sh_notes2
+│   │   ├── nk-rcfile.sh
+│   │   ├── Envs.sh
+│   │   ├── Envs/
+│   │   │   ├── PYTHONPATH.sh
+│   │   │   :
+│   │   :
+│   ├── .directory
+│   :
+├── nk.py
 ├── setup-nk.py
 :
 """ #TODO https://stackoverflow.com/questions/3207728/retaining-file-permissions-with-git
@@ -104,53 +118,67 @@ else:
 # Setting folder icon for ~/nk/Dev
 ###################################
 
-DEV_DIR_ICON = NK_DIR + 'Dev/.directory'
+DEV_DIR_FILE = NK_DIR + 'Dev/.directory'
+NOTES_DIR_FILE = NK_DIR + 'Notes/.directory'
+SETUP_DIR_FILE = NK_DIR + 'Setup/.directory'
 
-DE_ICON_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*?)Icon=(.*?)\n([\s\S]*)')
-DE_ALSO_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*?)(\[.+?\][\s\S]*)')
-DE_ONLY_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*)')
+def set_folder_icon (dir_file_path, icon_path):
 
-if os.path.isfile(DEV_DIR_ICON):
-    with open(DEV_DIR_ICON) as dev_dir_icon:
-        dev_dir_icon_ = dev_dir_icon.read()
+    DE_ICON_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*?)Icon=(.*?)\n([\s\S]*)')
+    DE_ALSO_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*?)(\[.+?\][\s\S]*)')
+    DE_ONLY_PATTERN = re.compile('([\s\S]*?)\[Desktop Entry\]([\s\S]*)')
 
-    if m:=DE_ICON_PATTERN.match(dev_dir_icon_):
-        groups = m.groups()
-        if re.match('[\s\S]*?\[.+?\][\s\S]*',groups[1]):
-            groups = DE_ALSO_PATTERN.match(dev_dir_icon_).groups()
-            with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-                dev_dir_icon.write(
+    if os.path.isfile(dir_file_path):
+        with open(dir_file_path) as dir_file:
+            dir_file_ = dir_file.read()
+
+        if m:=DE_ICON_PATTERN.match(dir_file_):
+            groups = m.groups()
+            if re.match('[\s\S]*?\[.+?\][\s\S]*',groups[1]):
+                groups = DE_ALSO_PATTERN.match(dir_file_).groups()
+                with open(dir_file_path, 'w') as dir_file:
+                    dir_file.write(
+                        groups[0] + '[Desktop Entry]' + groups[1].rstrip('\n') +\
+                            '\nIcon='+NK_DIR+'.assets/'+icon_path+'\n\n' + groups[2]
+                    )
+            else:
+                with open(dir_file_path, 'w') as dir_file:
+                    dir_file.write(
+                        groups[0] + '[Desktop Entry]' + groups[1] +\
+                            'Icon='+NK_DIR+'.assets/'+icon_path+'\n' + groups[3]
+                    )
+        elif m:=DE_ALSO_PATTERN.match(dir_file_):
+            groups = m.groups()
+            with open(dir_file_path, 'w') as dir_file:
+                dir_file.write(
                     groups[0] + '[Desktop Entry]' + groups[1].rstrip('\n') +\
-                        '\nIcon='+NK_DIR+'.assets/NK.ico\n\n' + groups[2]
+                        '\nIcon='+NK_DIR+'.assets/'+icon_path+'\n\n' + groups[2]
+                )
+        elif m:=DE_ONLY_PATTERN.match(dir_file_):
+            groups = m.groups()
+            with open(dir_file_path, 'w') as dir_file:
+                dir_file.write(
+                    groups[0] + '[Desktop Entry]' + groups[1].rstrip('\n') +\
+                        '\nIcon='+NK_DIR+'.assets/'+icon_path+'\n'
                 )
         else:
-            with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-                dev_dir_icon.write(
-                    groups[0] + '[Desktop Entry]' + groups[1] +\
-                        'Icon='+NK_DIR+'.assets/NK.ico\n' + groups[3]
-                )
-    elif m:=DE_ALSO_PATTERN.match(dev_dir_icon_):
-        groups = m.groups()
-        with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-            dev_dir_icon.write(
-                groups[0] + '[Desktop Entry]' + groups[1].rstrip('\n') +\
-                    '\nIcon='+NK_DIR+'.assets/NK.ico\n\n' + groups[2]
-            )
-    elif m:=DE_ONLY_PATTERN.match(dev_dir_icon_):
-        groups = m.groups()
-        with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-            dev_dir_icon.write(
-                groups[0] + '[Desktop Entry]' + groups[1].rstrip('\n') +\
-                    '\nIcon='+NK_DIR+'.assets/NK.ico\n'
-            )
-    else:
-        with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-            dev_dir_icon.write('[Desktop Entry]\nIcon={}\n\n'.format(NK_DIR + '.assets/NK.ico'))
-            dev_dir_icon.write(dev_dir_icon_)
+            with open(dir_file_path, 'w') as dir_file:
+                dir_file.write('[Desktop Entry]\nIcon={}\n\n'.format(NK_DIR + '.assets/'+icon_path))
+                dir_file.write(dir_file_)
 
-else:
-    with open(DEV_DIR_ICON, 'w') as dev_dir_icon:
-        dev_dir_icon.write('[Desktop Entry]\nIcon={}\n'.format(NK_DIR + '.assets/NK.ico'))
+    else:
+        with open(dir_file_path, 'w') as dir_file:
+            dir_file.write('[Desktop Entry]\nIcon={}\n'.format(NK_DIR + '.assets/'+icon_path))
+
+#DEV_ICON = 'NK.ico'
+DEV_ICON = 'Dev.ico'
+NOTES_ICON = 'Notes.ico'
+SETUP_ICON = 'nk_.ico'
+#SETUP_ICON = 'nk.ico'
+
+set_folder_icon(DEV_DIR_FILE, DEV_ICON)
+set_folder_icon(NOTES_DIR_FILE, NOTES_ICON)
+set_folder_icon(SETUP_DIR_FILE, SETUP_ICON)
 
 # Adding nk-profile
 ####################
@@ -252,3 +280,8 @@ os.makedirs(os.path.join(NK_DIR, "Dev/jupyter/data"), exist_ok=True)
 
 os.system('sudo pacman -S jupyter{,lab,-notebook} python-ipykernel')
 os.system('sudo pacman -S sagemath{,-doc,-jupyter} cantor')
+
+os.system('sudo -K')
+
+
+#TODO add script to ignorespace from history and add ghs in history ignore

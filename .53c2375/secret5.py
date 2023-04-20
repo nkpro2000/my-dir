@@ -7,6 +7,7 @@
 import os
 import shlex
 
+#TODO better to have secrets in seprate file and secret5.{sh,py} will parse and export them
 
 dirname = os.path.dirname(os.path.realpath(__file__))
 with open(os.path.join(dirname, 'secret5.sh'), 'r') as f:
