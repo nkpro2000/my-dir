@@ -48,6 +48,7 @@ fi
 unset nk_rcfile_profile_path nk_rcfile_rcfiles_path
 # Mentioning first job (updating PATH) is done
 fi; NK_RCFILE_RETURN='[0]'
+# Unlike nk-profile, Detailed return is not needed. Anyway, Errors will be printed on shell.
 
 
 ## Adding Environmental Variables

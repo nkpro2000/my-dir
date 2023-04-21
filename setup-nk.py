@@ -116,8 +116,8 @@ else:
     with open(USER_PLACES, 'w') as user_places:
         user_places.write(new_places)
 
-# Setting folder icon for ~/nk/Dev
-###################################
+# Setting folder icon for dirs
+###############################
 
 NK_DIR_FILE = NK_DIR + '.directory'
 DEV_DIR_FILE = NK_DIR + 'Dev/.directory'

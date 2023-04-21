@@ -35,7 +35,7 @@ ghs () { # GitHub Ssh
     #[-r--------]  ├── gh_*
     #[-r--------]  └── gh_*.pub
 
-    #TODO read secret $1 in posix standard. define read_secret in Shell.sh
+    #TODO read secret $1 in posix standard.
 
     if test -n "$2"; then
         (export GIT_SSH_COMMAND='ssh -i '"${HOME}/nk/Dev/.ssh/gh_$1"' -o IdentitiesOnly=yes'; echo "$2" | xargs git)
