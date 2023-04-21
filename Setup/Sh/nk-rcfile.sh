@@ -1,4 +1,4 @@
-# Will be run by SHELL
+# Will be run by SHELL from RCfiles (appended by ~/nk/setup-nk.py)
 # like `. ~/nk/Setup/Sh/nk-rcfile.sh`
 
 # shellcheck shell=sh

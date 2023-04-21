@@ -1,4 +1,6 @@
 # Environmental Variables
+# Will be run by ~/nk/Setup/Sh/nk-{profile,rcfile}.sh
+# like `. ~/nk/Setup/Sh/Envs.sh`
 
 # shellcheck shell=sh
 :
