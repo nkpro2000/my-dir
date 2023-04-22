@@ -40,3 +40,10 @@ read_secret () { # Read secret string
 }
 # https://stackoverflow.com/a/28393320
 # https://unix.stackexchange.com/a/223000
+
+## For linting and formatting shell scripts.
+# find . -path './.git' -prune -o -type f -exec bash -c '
+#  if [[ "{}" =~ \.sh$ ]]; then  clear;echo sc "{}";shellcheck {};echo cs;read;  clear;echo sf {};shfmt -i 4 -ci -p -d {};echo fs;read;
+#  elif test "$(head -n1 '"'"'{}'"'"' | grep -E '"'"'^#! ?/bin/(da|ba|z|fi)?sh'"'"')"
+#   then clear;echo sc {};shellcheck {};echo cs;read; clear;echo sf {};shfmt -i 4 -ci -d {};echo fs;read;
+#  fi' \;
