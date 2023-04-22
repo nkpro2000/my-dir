@@ -20,6 +20,7 @@ read_secret () { # Read secret string
     stty -echo || exit
 
     # read command with arguments from read_secret & record exit status
+    # shellcheck disable=SC2162 # -r can be passed from read_secret
     read "$@"; ret=$?
 
     # Restoring settings:

@@ -38,7 +38,7 @@ if test -n "$nk_rcfile_profile_path"; then
             export PATH
             ;;
         *)
-            echo 'nk-rcfile : Warning : Profile Path present but not set in PATH'
+            echo 'nk-rcfile : Warning : Profile Path present but not set in PATH' >&2
             export PATH="${nk_rcfile_rcfiles_path}${PATH:+:$PATH}"
     esac
 else

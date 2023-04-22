@@ -10,7 +10,7 @@ ghs () { # GitHub Ssh
     # and executing git COMMAND
     remote_url="$(git remote get-url --push origin 2>/dev/null || echo NotInRepo)"
     if test "$remote_url" = "NotInRepo"; then
-        echo 'Not in a git repository'
+        echo 'Not in a git repository' >&2
         return 0
     else
         case "$remote_url" in
@@ -20,7 +20,7 @@ ghs () { # GitHub Ssh
                 remote_url="git@github.com:$(echo "$remote_url" | cut -d'/' -f4-)"
                 ;;
             *)
-                echo 'Unknown method on remote url'
+                echo 'Unknown method on remote url' >&2
                 echo 'Current url : '"$remote_url"
                 echo 'Enter Remote url (ssh method) manually: '
                 read -r remote_url
