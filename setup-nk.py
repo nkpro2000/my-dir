@@ -1,3 +1,4 @@
+#TODO add shebang with proper python env. First think method for python verion management for nkDev
 """ $ tree -aF ~/nk
 ~/nk/
 :
