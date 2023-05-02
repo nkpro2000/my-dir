@@ -1,5 +1,6 @@
-# Will be run by shell rc files
-# like `. ~/nk/Dev/Envs/Github.sh`
+# To add functions/aliases/envs related to GitHub.
+# Will be run by ~/nk/Setup/Sh/nk-rcfile.sh (by shell rc files)
+# like `for nk_rcfile_sc in ~/nk/Dev/Envs/*; do . "$nk_rcfile_sc"; done` .
 
 # shellcheck shell=sh
 

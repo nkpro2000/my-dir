@@ -1,5 +1,6 @@
-# Will be run by shell rc files
-# like `. ~/nk/Dev/Envs/Shell.sh`
+# To add functions/aliases/envs related to SHELLs or for adjacent scripts.
+# Will be run by ~/nk/Setup/Sh/nk-rcfile.sh (by shell rc files)
+# like `for nk_rcfile_sc in ~/nk/Dev/Envs/*; do . "$nk_rcfile_sc"; done` .
 
 # shellcheck shell=sh
 

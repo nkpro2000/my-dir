@@ -2,6 +2,7 @@
 # This generates the PATH for profile and shellrcs.
 # This script only edits first two lines of ~/nk/Dev/bin/.path .
 # Which then used by ~/nk/Setup/Sh/nk-{pro,rc}file.sh for updating PATH.
+# Will be run user like `.generate_path` from shell after updating ~/nk/Dev/bin/.path .
 
 profile_path=''
 rcfiles_path=''

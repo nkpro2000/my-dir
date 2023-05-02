@@ -1,3 +1,9 @@
+# Specifies intentionally untracked files to ignore.
+# Each line specifies a pattern, for Git to ignore paths.
+# Files already tracked by Git are not affected.
+# https://git-scm.com/docs/gitignore
+
+
 # Not to upload other secrets [secret5.{sh,py} will not be ignored since it is already tracked]
 /.53c2375/**
 # Some other assets (Like icons used for panel widgets)

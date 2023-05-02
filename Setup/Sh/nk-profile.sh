@@ -1,3 +1,5 @@
+# To update shell envs (related to nk) in login SHELL.
+# Like Env variables, updating PATH, etc.,
 # Will be run by /etc/profile.d/zm_nk-profile.sh
 # like `. ~/nk/Setup/Sh/nk-profile.sh`
 

@@ -1,3 +1,5 @@
+# To update shell envs (related to nk) in interactive SHELL.
+# Like adding aliases, cmds to PATH, etc.,
 # Will be run by SHELL from RCfiles (appended by ~/nk/setup-nk.py)
 # like `. ~/nk/Setup/Sh/nk-rcfile.sh`
 

@@ -1,3 +1,5 @@
+# To load secret as variables to python script.
+# Used like:
 """
 >>> import sys, pathlib
 >>> sys.path.append(f'{pathlib.Path.home()}/nk/.53c2375')

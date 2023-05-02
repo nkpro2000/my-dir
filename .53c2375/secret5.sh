@@ -1,4 +1,5 @@
-# Will be run by SHELL
+# To load secret as envs to shell.
+# Will be run by Shell (by user)
 # like `. ~/nk/.53c2375/secret5.sh
 
 # shellcheck shell=sh
