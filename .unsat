@@ -1,0 +1,45 @@
+# Used  NameSpaces And Tags  list
+# so that other script don't use these, to avoid accidental value updating.
+
+# #TYPE: can be tag,script_env,shell_env,special_tag
+
+# Prefix for global env from nk-profile.sh .
+#TYPE:shell_env
+#PATH:./Setup/Sh/nk-profile.sh
+NK_PROFILE
+
+# Prefix for variable names of script nk-profile.sh .
+#TYPE:script_env
+#PATH:./Setup/Sh/nk-profile.sh
+nk_profile
+
+# Prefix for global env from nk-rcfile.sh .
+#TYPE:shell_env
+#PATH:./Setup/Sh/nk-rcfile.sh
+NK_RCFILE
+
+# Prefix for variable names of script nk-rcfile.sh .
+#TYPE:script_env
+#PATH:./Setup/Sh/nk-rcfile.sh
+nk_rcfile
+
+# Tag the appended code block in rcfiles (.bashrc,.zsh,...) and Tag in logging.
+#TYPE:tag
+#PATH:./setup-nk.py|./Setup/Sh/nk-rcfile.sh
+nk-rcfile
+
+# used nk- for all files name which will be read/executed fromm outside ~/nk .
+## used zm_nk- for /etc/profile to run it last, with space for adding some later (like zc_nk- or zs_nk-).
+# used -nk for all files used for ~/nk (Eg: setup-nk.py)
+
+# Prefix for variable names of scripts in ~/nk/Dev/Envs/ .
+#TYPE:script_env
+#PATH:./Dev/Envs/*
+nk_devenv
+
+# Tag to perform some special actions in the tagged region in nk_kbd-*.map files | just tagging block.
+#TYPE:special_tag|tag    #  nk-kbdmap-include* | nk-kbdmap
+#PATH:./Setup/Tty/*
+nk-kbdmap
+
+# used nk_kbd- for my keymap files (Eg: nk_kbd-us{,1,2,...}.map.gz).

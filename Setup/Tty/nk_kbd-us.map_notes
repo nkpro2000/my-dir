@@ -1,0 +1,17 @@
+`find /usr/share/kbd/keymaps -name $(localectl | grep VC\ Keymap | cut -d: -f2)'.*'` command
+shows the keymap file which is loaded by Virtual Consoles.
+also `cat /etc/vconsole.conf` can be used to find which keymap is set.
+
+Current default is /usr/share/kbd/keymaps/i386/qwerty/us.map.gz
+ which includes:
+  - qwerty-layout
+   - compose
+  - linux-with-alt-and-altgr
+   - linux-keys-bare
+  - compose.latin1
+  - euro1.map
+
+Commands useful for these keymaps are :
+- `loadkeys` : to load keymap
+- `dumpkeys` : to dump the keyboard translation tables
+- `showkey` : to find keycode of each keys
