@@ -1,4 +1,4 @@
-#TODO add shebang with proper python env. First think method for python verion management for nkDev
+#TODO add shebang with proper python env. First think method for python version management for nkDev
 # This is the first file to run after cloning so that all are configured as intended.
 # See comments ######### for steps involved in this process done by this script.
 # Will be run user like `python setup-nk.py` after cloning this repo in ~/nk .

@@ -1,7 +1,7 @@
 # Used  NameSpaces And Tags  list
 # so that other script don't use these, to avoid accidental value updating.
 
-# #TYPE: can be tag,script_env,shell_env,special_tag
+# #TYPE: can be tag,script_env,shell_env,special_tag.
 
 # Prefix for global env from nk-profile.sh .
 #TYPE:shell_env
@@ -28,9 +28,10 @@ nk_rcfile
 #PATH:./setup-nk.py|./Setup/Sh/nk-rcfile.sh
 nk-rcfile
 
-# used nk- for all files name which will be read/executed fromm outside ~/nk .
+# used nk- for all files name which will be read/executed from outside ~/nk .
 ## used zm_nk- for /etc/profile to run it last, with space for adding some later (like zc_nk- or zs_nk-).
-# used -nk for all files used for ~/nk (Eg: setup-nk.py)
+# used -nk for all files used for ~/nk (Eg: setup-nk.py).
+## used -nk_kbd for python script to setup nk keymaps setup-nk_kbd.py .
 
 # Prefix for variable names of scripts in ~/nk/Dev/Envs/ .
 #TYPE:script_env
