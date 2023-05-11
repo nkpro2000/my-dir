@@ -1,0 +1,16 @@
+- current kbd table : `dumpkeys > dumpkeys-_notes`
+
+- Key Symbols (*keysyms*) list : `dumpkeys -l > dumpkeys-l_notes`
+
+- shows all the unassigned keycodes :
+  ```bash
+  dumpkeys | grep -v 'nul' | grep -Eo '^keycode\ +[0-9]+' | cut -d\  -f2- | python -c 'import sys; l=sys.stdin.read(); print(set(range(128)) - set(map(int,l.split())))'
+  # {0, 85, 89, 90, 91, 92, 93, 94, 95, 112, 113, 114, 115, 116, 117, 118, 120, 121, 122, 123, 124, 125, 126, 127}
+  ```
+
+- ```bash
+  dumpkeys --long-info | awk '/^0x0000/, /^$/ {
+          if(/^$/) exit;
+          printf("#define KS_%-22s %s\n", $2, $1);
+  }' > keysyms.h
+  ```

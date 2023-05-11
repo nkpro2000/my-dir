@@ -21,12 +21,16 @@
 /Notes/*
 # May upload in other repos
 /Setup/Panel/Scripts/**
+# Just git repo of kbd from git.kernel.org
+/Setup/Tty/kbd/
 
 ### My Coding Environment ###
 # DOLPHIN Directory metadata
 .directory
 # VS_CODE PYTHON Unit test / coverage reports
 .pytest_cache/
+# VScode workspace dir
+.vscode/
 # PYTHON Byte-compiled / optimized / DLL files
 __pycache__/
 
@@ -178,7 +182,23 @@ __pycache__/
 # O ./Setup/Sh/nk-profile.sh_notes2
 # O ./Setup/Sh/nk-rcfile.sh
 # O ./Setup/Sh/zm_nk-profile.sh
+# O ./Setup/Tty/
+# O ./Setup/Tty/if_have_some_file
+# X ./Setup/Tty/kbd/
+# X ./Setup/Tty/kbd/if_have_some_file
+# X ./Setup/Tty/kbd/somefile
+# O ./Setup/Tty/dumpkeys_notes
+# O ./Setup/Tty/dumpkeys-_notes
+# O ./Setup/Tty/dumpkeys-l_notes
+# O ./Setup/Tty/nk_kbd-header.inc
+# O ./Setup/Tty/nk_kbd-us.map
+# O ./Setup/Tty/nk_kbd-us.map_notes
+# O ./Setup/Tty/setup-nk_kbd.py
 # X ./Things/
 # X ./Things/if_have_some_file
 # X ./Things/somefile
+# O ./.unsat
+# X ./.vscode/
+# X ./.vscode/if_have_some_file
+# X ./.vscode/settings.json
 # ~/nk >>> 
