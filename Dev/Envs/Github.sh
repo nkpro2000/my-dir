@@ -39,8 +39,10 @@ ghs () { # GitHub Ssh
     #TODO read secret $1 in posix standard.
 
     if test -n "$2"; then
+        # shellcheck disable=SC2030 # Setting variable inside subshell (so local) is intentional.
         (export GIT_SSH_COMMAND='ssh -i '"${HOME}/nk/Dev/.ssh/gh_$1"' -o IdentitiesOnly=yes'; echo "$2" | xargs git)
     else
+        # shellcheck disable=SC2031 # Setting variable inside subshell is intentional.
         (export GIT_SSH_COMMAND='ssh -i '"${HOME}/nk/Dev/.ssh/gh_$1"' -o IdentitiesOnly=yes'; git push origin master)
     fi
 }

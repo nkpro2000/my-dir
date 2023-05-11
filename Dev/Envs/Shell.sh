@@ -4,6 +4,17 @@
 
 # shellcheck shell=sh
 
+# May use this method to retain env variables unchanged,
+## a='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&'"'"'()*+,-./:;<=>?@[\]^_`{|}~ '$'\t\n\r\x0b\x0c'
+## eval "fn_can_edit_a; a='$(/bin/echo "$a"|sed "s/'/'"'"'"'"'"'"'/")'"
+##                                                   (s/'/')(")(')(")('/)
+##                                ^-- https://stackoverflow.com/questions/36277870/zsh-why-is-n-interpreted-within-single-quotes
+# Like:
+## fn1_() { definition }
+## fn() { eval "fn1_ $@; fn1_v1='$(above method)'; fn1_v2='$(above method)'"}
+## # fn1_v* are all variables used inside fn1_ function.
+#
+# But this method is not suitable for other type of variables.
 
 read_secret () { # Read secret string
     # The `read -s` will turn off echo for getting secrets.
