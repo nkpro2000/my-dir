@@ -8,7 +8,7 @@
 # nk-kbdmap-include-0- : copy contents in files, but remove `include` statements.
 # nk-kbdmap-include-0  : copy contents in files, no parsing/removing `include` statements. (default:nk-kbdmap-include)
 # nk-kbdmap-include-   : copy contents in files and also in files parsed from `include` statements, recursively.
-# nk-kbdmap-include-n  : " , but recursive upto n depth (below that `include`s will not be parsed/removed).
+# nk-kbdmap-include-n  : " , but recursive up to n depth (below that `include`s will not be parsed/removed).
 # nk-kbdmap-include-n- : same as 'nk-kbdmap-include-n', but below n depth `include` will be removed.
 #
 # nk-kbdmap-exclude-PATTERNS : while parsing `include`s, file names matching PATTERNS will be skipped.
@@ -26,8 +26,9 @@
 #  ctrlr      128 # 5th Layer
 #  capsshift  256 
 
-keymaps 0,1,4,8,2,12,5,9,13,6,3,7
-#\        `single/`ShCoAl C/`ShCoAg C| Default: 0-2,4-6,8-9,12
+keymaps 0-15
+#KEYMAPS: 0,1,4,8,2,12,5,9,13,6,3,7
+#\\         `single/`ShCoAl C/`ShCoAg C| Default: 0-2,4-6,8-9,12
 # 0-15 columns (Shift, AltGr, Control, Alt, and all of their Combinations) is used for this layout.
 # Others (>15) can be used for extended layouts, Eg: shiftl + 0-15 gives 16-31 columns.
 #
@@ -49,15 +50,17 @@ keymaps 0,1,4,8,2,12,5,9,13,6,3,7
 # 11  1  1  0  1  Shift + Alt + AltGr
 # 14  0  1  1  1  Ctrl + Alt + AltGr
 # 15  1  1  1  1  Shift + Ctrl + Alt + AltGr
-#SKIPLINES:-22 #8 But kbd-project sees the above `keymaps` statement as `keymaps 0-9,12-13`, So
-#KEYMAPS: 0-3, 4, 8, 12  # Converts map with above `keymaps` format into this format and exports.
-#\       `4sL/`Co,Al,CA|
-#  5  1  0  1  0  Ctrl + Shift
-#  6  0  1  1  0  Ctrl +         AltGr
-#  7  1  1  1  0  Ctrl + Shift + AltGr
-#  9  1  0  0  1  Alt  + Shift
-# 10  0  1  0  1  Alt  +         AltGr
-# 11  1  1  0  1  Alt  + Shift + AltGr
+#
+# Actually `keymaps` is for mentioning modifier weights used in the keymap file. So
+# `#KEYMAPS:` will be used for custom column order (which is incorrect format) and then
+# converted to right format using python scripts. Right format keymaps will to exported to
+# locations mentioned in each files (in `#PATH:`).
+#
+#SKIPLINES:-28 Refer above table for column order of keymap files in ~/nk/Setup/Tty/ .
+# 0  1  2  3   | 4 5 6 7 | 8 9 10 11 | 12 13 14 15 | Just for
+# Pl Sh Ag SAg | Co +    | Al + 4sub | Co + Al +   |  remembering
+# 4 SubLayers  |   4subL |    Layers |  4subLayers |   columns order.
+# No {Co,Al,Co+Al} + sub-layer symbols. Eg: Sh+Co+a is not Co+A .
 
 alt_is_meta
 #\
