@@ -26,7 +26,7 @@
 #  ctrlr      128 # 5th Layer
 #  capsshift  256 
 
-keymaps 0-15
+#keymaps 0-15 better loadkeys handle this. py script will make full table using `#KEYMAPS:`.
 #KEYMAPS: 0,1,4,8,2,12,5,9,13,6,3,7
 #\\         `single/`ShCoAl C/`ShCoAg C| Default: 0-2,4-6,8-9,12
 # 0-15 columns (Shift, AltGr, Control, Alt, and all of their Combinations) is used for this layout.
@@ -86,3 +86,15 @@ alt_is_meta
 # joplin://x-callback-url/openNote?id=5042e4e078114c21a0872ae2ca08b512
 #
 #SKIPLINES:-22 to avoid lot of comments in exported map files.
+
+## replaces first with second. this will be after `#nk-kbdmap-include*`.
+#DEFINE:VS VoidSymbol 
+#DEFINE:\0 nul        # ^@
+#DEFINE:\a Control_g  # ^G
+#DEFINE:\b BackSpace  # ^H
+#DEFINE:\t Tab        # ^I
+#DEFINE:\n Linefeed   # ^J
+#DEFINE:\v Control_k  # ^K
+#DEFINE:\f Control_l  # ^L
+#DEFINE:\r Control_m  # ^M
+#DEFINE:\e Escape     # ^[
