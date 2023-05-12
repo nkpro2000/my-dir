@@ -1,6 +1,19 @@
 - current kbd table : `dumpkeys > dumpkeys-_notes`
 
 - Key Symbols (*keysyms*) list : `dumpkeys -l > dumpkeys-l_notes`
+> ASCII
+> Extended ASCII
+> 0x01__ Function keys & some
+> 0x02__
+> 0x03__ KeyPad
+> 0x04__ dead_
+> 0x05__ Console_n
+> 0x06__ Arrow keys
+> 0x07__ Modifiers
+> 0x08__ Meta_
+> 0x09__ Ascii s and Hex s
+> 0x0a__ Modifier Locks
+> 0x0c__ S-Modifiers
 
 - shows all the unassigned keycodes :
   ```bash
