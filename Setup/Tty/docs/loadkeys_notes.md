@@ -1,5 +1,8 @@
 # Loadkeys
 
+> Extracted from : https://deskthority.net/wiki/Loadkeys
+> Learned from : https://github.com/haata/KeyboardLayouts.git
+
 **loadkeys** is a program that reads a file or set of files used to assign a keymap for the console. Console being the terminal **above** the X Server.
 
 These maps are usually located under <tt>kbd/keymaps/<arch></tt> (e.g. <tt>/usr/share/kbd/keymaps/<arch></tt>) and are just gzips of the loadkey files that are used as input for the loadkeys program.

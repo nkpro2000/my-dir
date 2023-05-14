@@ -27,3 +27,6 @@
           printf("#define KS_%-22s %s\n", $2, $1);
   }' > keysyms.h
   ```
+
+> https://wiki.archlinux.org/title/Keyboard_input
+> /usr/include/linux/input-event-codes.h
