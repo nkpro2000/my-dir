@@ -1,0 +1,57 @@
+# Mapping Special character keys for nk_kbd-us.map .
+
+#PATH:i386/qwerty/ # will put thisfile.qz in /usr/share/kbd/keymaps/i386/qwerty/ .
+
+#KEYMAPS: 0, 1, 4, 5
+# Plain, Shift, Ctrl, Shift+Ctrl
+alt_is_meta
+
+#   !   @   #   $   %       ^   &   *   (   )   # other special chars.
+#################################################
+#   `   |   -   |   =   |   [   |   ]   |   \   # ^S : Pause output
+#   ~   |   _   |   +   |   {   |   }   |   |   # ^Q : Resume output
+#   ^S  |  ^_   |   ^L  |  ^[   |  ^]   |  ^\   # ^L : Clear terminal
+#   ^Q  |   @   |   %   |   (   |   )   |   !   # ^\ : Sends SIGQUIT
+#-----------------------------------------------# ^D : Sends EndOfFile
+#####   ;   |   '   |   ,   |   .   |   /   ##### ^C : Sends SIGINT
+#####   :   |   "   |   <   |   >   |   ?   ##### ^Z : Suspends process with SIGTSTP
+#####   ^D  |   ^C  |   ^Z  |   ^G  |  ^?   ##### ^G : Abort / ^T : SIGINFO in some os
+#####   &   |   *   |   ^   |   $   |   #   #####
+################################################# ^[ x : Meta_Control_x
+# ^_ : Undo | ^] x : moves the cursor forward to the next occurrence of x
+##########$#=#^################^################^####################^###############$
+
+keycode  41 = grave            asciitilde       Control_s            Control_q
+#             `                ~                ^S                   ^Q
+#ORGI   control	keycode  41 = nul
+keycode  12 = minus            underscore       Control_underscore   at
+#             -                _                ^_                   @
+keycode  13 = equal            plus             Control_l            percent
+#             =                +                ^L                   %
+
+keycode  26 = bracketleft      braceleft        Escape               parenleft
+#             [                {                ^[                   (
+keycode  27 = bracketright     braceright       Control_bracketright parenright
+#             ]                }                ^]                   )
+keycode  43 = backslash        bar              Control_backslash    exclam
+#             \                |                ^\                   !
+
+keycode  39 = semicolon        colon            Control_d            ampersand
+#             ;                :                ^D                   &
+keycode  40 = apostrophe       quotedbl         Control_c            asterisk
+#             '                "                ^C                   *
+#ORGI   control  keycode  40 = Control_g
+
+keycode  51 = comma            less             Control_z            asciicircum
+#             ,                <                ^Z                   ^
+keycode  52 = period           greater          Control_g            dollar
+#             .                >                ^G                   $
+keycode  53 = slash            question         Delete               numbersign
+#             /                ?                ^?                   #
+#ORGI   control keycode  53 = Control_underscore
+#ORGI   control shift keycode  53 = Delete
+
+#ORGI keycode  86 = less             greater
+#ORGI   altgr keycode 86 = bar
+
+## Covered all special character, appropriate control codes and frequent shell control codes.
