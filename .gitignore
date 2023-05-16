@@ -23,6 +23,8 @@
 /Setup/Panel/Scripts/**
 # Just git repo of kbd from git.kernel.org
 /Setup/Tty/kbd/
+# Just temporary dir for intermediate keymap files
+/Setup/Tty/keymaps/tmp/
 
 ### My Coding Environment ###
 # DOLPHIN Directory metadata
@@ -184,15 +186,28 @@ __pycache__/
 # O ./Setup/Sh/zm_nk-profile.sh
 # O ./Setup/Tty/
 # O ./Setup/Tty/if_have_some_file
+# O ./Setup/Tty/docs/
+# O ./Setup/Tty/docs/if_have_some_file
+# O ./Setup/Tty/docs/dumpkeys-l_notes
+# O ./Setup/Tty/docs/dumpkeys-_notes
+# O ./Setup/Tty/docs/dumpkeys_notes
+# O ./Setup/Tty/docs/loadkeys_notes.md
 # X ./Setup/Tty/kbd/
 # X ./Setup/Tty/kbd/if_have_some_file
 # X ./Setup/Tty/kbd/somefile
-# O ./Setup/Tty/dumpkeys_notes
-# O ./Setup/Tty/dumpkeys-_notes
-# O ./Setup/Tty/dumpkeys-l_notes
-# O ./Setup/Tty/nk_kbd-header.inc
-# O ./Setup/Tty/nk_kbd-us.map
-# O ./Setup/Tty/nk_kbd-us.map_notes
+# O ./Setup/Tty/keymaps/
+# O ./Setup/Tty/keymaps/if_have_some_file
+# O ./Setup/Tty/keymaps/nk_kbd-header.inc
+# O ./Setup/Tty/keymaps/nk_kbd-us-alpnum.map
+# O ./Setup/Tty/keymaps/nk_kbd-us-extras.map
+# O ./Setup/Tty/keymaps/nk_kbd-us-fnkeys.map
+# O ./Setup/Tty/keymaps/nk_kbd-us-keypad.map
+# O ./Setup/Tty/keymaps/nk_kbd-us.map
+# O ./Setup/Tty/keymaps/nk_kbd-us.map_notes
+# O ./Setup/Tty/keymaps/nk_kbd-us-others.map
+# O ./Setup/Tty/keymaps/nk_kbd-us-splchr.map
+# X ./Setup/Tty/keymaps/tmp/
+# X ./Setup/Tty/keymaps/tmp/if_have_some_file
 # O ./Setup/Tty/setup-nk_kbd.py
 # X ./Things/
 # X ./Things/if_have_some_file
