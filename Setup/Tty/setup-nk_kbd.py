@@ -17,6 +17,7 @@ KEYSYM_SYNONYMS = re.compile(r'([0-9a-zA-Z_-]+) +for +([0-9a-zA-Z_-]+)')
 MODIFIRES = ['shift', 'altgr', 'control', 'alt', 'shiftl', 'shiftr', 'ctrll', 'ctrlr', 'capsshift']
 
 KEYCODE_MAP = re.compile(r'([ a-z]*?)keycode +([0-9]+) += +([ 0-9a-zA-Z+_-]+)')
+VERBOSE = True
 
 
 def get_modifiers(w):
@@ -45,65 +46,73 @@ for i in dl:
         keysym_synonyms.append(m.groups())
 
 
-def parse_keymap_file(lines) :
-    keymaps_line = list(range(256))
-    keycode_map_ = []
-    keycode_maps = []
-    for line in lines:
-        try:
-            if len(line) > 0:
-                if line.startswith('#KEYMAPS:'):
-                    keymaps_line = []
-                    for i in line[9:].split(','):
-                        if (j:=i.find('-')) != -1:
-                            keymaps_line.extend(range(int(i[:j]), int(i[j+1:])+1))
-                        else:
-                            keymaps_line.append(int(i))
-                elif line.startswith('#META_:'):
-                    keycode_map_ = []
-                    for i in line [7:].split():
-                        keycode_map_.append(f'#META_:{i}')
-                elif line[0] != '#':
-                    if m:=KEYCODE_MAP.match(line) :
-                        keycode_maps.append(m.groups())
-                    else:
-                        keycode_map_.append(line.strip())
-        except Exception as e:
-            print(f'?> Error : {e} \n?> \'-> Caused by line : {line}')
-            raise e
-
-    return keymaps_line, keycode_map_, keycode_maps
-
-def gen_keymaps(kl, kmaps_, kmaps) :
-    keymaps = [*(x for x in kmaps_ if not x.startswith('#META_:')), '','']
-    for i in kmaps:
-        if i[0]:
-            print(i) #format here
+def keymaps_line(kml:list[int], lines:list[str]) :
+    lines_out = []
+    for line in lines :
+        if len(line)==0 or line.isspace() :
+            lines_out.append(''); continue
+        if line.startswith('#') :
+            lines_out.append(line); continue
+        if not (m:=KEYCODE_MAP.match(line)) :
+            lines_out.extend([
+                '#MetaString#',
+                line.strip()
+            ])
+            if VERBOSE:
+                print('|> #MetaString#', line.strip())
+            continue
+        
+        ms, kc, ks = m.groups()
+        ks = ks.split()
+        if len(ms)==0 or ms.isspace():
+            if len(ks) > len(kml):
+                raise LookupError('Keysymbols beyond columns specified in keymapsline.')
+            for mk in zip(kml, ks):
+                if mk[1] != 'SKIP':
+                    lines_out.append(f'{get_modifiers(mk[0])} keycode {kc} = {mk[1]}')
         else:
-            for j in zip(kl, i[2].split()):
-                if j[1]!='SKIP':
-                    keymaps.append(f'{get_modifiers(j[0])} keycode {i[1]} = {j[1]}')
+            if len(ks) != 1:
+                raise LookupError('There must be only one keysymbole, if defined with modifiers.')
+            lines_out.append(f'{ms.strip()} keycode {kc} = {ks[0]}')
+    
+    return lines_out
 
-                    m_k = j[1].lstrip('+')
-                    for s in keysym_synonyms:
-                        if s[0] == m_k:
-                            m_k = s[1]
-                    if f'Meta_{m_k}' in (x[1] for x in keysyms):
-                        for k in kmaps_:
-                            if k.startswith('#META_:'):
-                                keymaps.append(f'    {k[7:]} {get_modifiers(j[0]).replace("plain","")} '\
-                                    +f'keycode {i[1]} = Meta_{m_k}')
-
-        keymaps.append('')
-
-    return '\n'.join(keymaps)
-
-
-
+def add_meta_for_asciis(meta_:list[str], lines:list[str]):
+    lines_out = []
+    for line in lines:
+        if (m:=KEYCODE_MAP.match(line)) :
+            ms, kc, ks = m.groups()
+            ks = ks.split()
+            if len(ks) != 1:
+                # All keycode maps must be defined with modifiers,
+                # since this fn is called after above fn `keymaps_line`.
+                raise LookupError('There must be only one keysymbole, if defined with modifiers.')
+            lines_out.append(line)
+            
+            m_k = ks[0].lstrip('+')
+            ms = ms.strip()
+            ms = ' '+ms if ms != 'plain' else ''
+            for m_ in meta_:
+                if m_ in ms:
+                    lines_out.insert(-1, '#May overwrite/affected_by Meta Modifiers defined lines#')
+                    if VERBOSE:
+                        print('|> #May overwrite/affected_by Meta Modifiers defined lines#')
+                        print('|> ' + line)
+                    break # Don't redefine.
+            else:
+                for s in keysym_synonyms:
+                    if s[0] == m_k:
+                        m_k = s[1]
+                if f'Meta_{m_k}' in (x[1] for x in keysyms):
+                    for m_ in meta_:
+                        lines_out.append(f'  {m_}{ms} keycode {kc} = Meta_{m_k}')
+        else:
+            lines_out.append(line)
+    
+    return lines_out
 
 
 with open('./keymaps/nk_kbd-us-alpnum.map') as f:
     lines = f.read().splitlines()
 
-r = parse_keymap_file(lines)
-print(gen_keymaps(*r))
+print('\n'.join(add_meta_for_asciis(['alt', 'altgr'], keymaps_line([0,1,4,5], lines))))
