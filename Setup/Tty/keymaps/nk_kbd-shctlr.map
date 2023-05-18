@@ -1,0 +1,232 @@
+# Defining ShiftL, ShiftR, CtrlL and CtrlR toggles.
+## Using Alt + Super key for CtrlR Lock,
+## and CtrlR will be used for all other modifier locking.
+
+
+#CtrlR#
+
+# Alt + Super -> CtrlR_Lock
+alt keycode 125 = CtrlR_Lock
+
+shiftl                    alt keycode 125 = CtrlR_Lock
+       shiftr             alt keycode 125 = CtrlR_Lock
+              ctrll       alt keycode 125 = CtrlR_Lock
+                    ctrlr alt keycode 125 = CtrlR_Lock
+shiftl shiftr             alt keycode 125 = CtrlR_Lock
+shiftl        ctrll       alt keycode 125 = CtrlR_Lock
+shiftl              ctrlr alt keycode 125 = CtrlR_Lock
+       shiftr ctrll       alt keycode 125 = CtrlR_Lock
+       shiftr       ctrlr alt keycode 125 = CtrlR_Lock
+              ctrll ctrlr alt keycode 125 = CtrlR_Lock
+shiftl shiftr ctrll       alt keycode 125 = CtrlR_Lock
+shiftl shiftr       ctrlr alt keycode 125 = CtrlR_Lock
+shiftl        ctrll ctrlr alt keycode 125 = CtrlR_Lock
+       shiftr ctrll ctrlr alt keycode 125 = CtrlR_Lock
+shiftl shiftr ctrll ctrlr alt keycode 125 = CtrlR_Lock
+
+# pressing Tab key while in CtrlR lock will release CtrlR lock.
+## Cr|Sl|Cl|Sr] Tab is Pop.
+                    ctrlr keycode 15 = CtrlR_Lock
+shiftl              ctrlr keycode 15 = CtrlR_Lock
+       shiftr       ctrlr keycode 15 = CtrlR_Lock
+              ctrll ctrlr keycode 15 = CtrlR_Lock
+shiftl shiftr       ctrlr keycode 15 = CtrlR_Lock
+shiftl        ctrll ctrlr keycode 15 = CtrlR_Lock
+       shiftr ctrll ctrlr keycode 15 = CtrlR_Lock
+shiftl shiftr ctrll ctrlr keycode 15 = CtrlR_Lock
+
+# pressing Esc key while only CtrlR lock will release CtrlR lock.
+                    ctrlr keycode 1 = CtrlR_Lock
+
+
+#ShiftL#
+
+# CtrlR: Shift + Super -> ShiftL_Lock
+ctrlr shift keycode 125 = ShiftL_Lock
+
+                    ctrlr shift keycode 125 = ShiftL_Lock
+shiftl              ctrlr shift keycode 125 = ShiftL_Lock
+       shiftr       ctrlr shift keycode 125 = ShiftL_Lock
+              ctrll ctrlr shift keycode 125 = ShiftL_Lock
+shiftl shiftr       ctrlr shift keycode 125 = ShiftL_Lock
+shiftl        ctrll ctrlr shift keycode 125 = ShiftL_Lock
+       shiftr ctrll ctrlr shift keycode 125 = ShiftL_Lock
+shiftl shiftr ctrll ctrlr shift keycode 125 = ShiftL_Lock
+
+# pressing Tab key while in ShiftL lock (but not CtrlR) will release ShiftL lock.
+shiftl                    keycode 15 = ShiftL_Lock
+shiftl shiftr             keycode 15 = ShiftL_Lock
+shiftl        ctrll       keycode 15 = ShiftL_Lock
+shiftl shiftr ctrll       keycode 15 = ShiftL_Lock
+
+# pressing Esc key while in ShiftL lock (but not ShiftR, CtrlL) will release ShiftL lock.
+shiftl                    keycode 1 = ShiftL_Lock
+shiftl              ctrlr keycode 1 = ShiftL_Lock
+
+
+#CtrlL#
+
+# CtrlR: Ctrl + Super -> CtrlL_Lock
+ctrlr control keycode 125 = CtrlL_Lock
+
+                    ctrlr control keycode 125 = CtrlL_Lock
+shiftl              ctrlr control keycode 125 = CtrlL_Lock
+       shiftr       ctrlr control keycode 125 = CtrlL_Lock
+              ctrll ctrlr control keycode 125 = CtrlL_Lock
+shiftl shiftr       ctrlr control keycode 125 = CtrlL_Lock
+shiftl        ctrll ctrlr control keycode 125 = CtrlL_Lock
+       shiftr ctrll ctrlr control keycode 125 = CtrlL_Lock
+shiftl shiftr ctrll ctrlr control keycode 125 = CtrlL_Lock
+
+# pressing Tab key while in CtrlL lock (but not CtrlR, ShiftL) will release CtrlL lock.
+              ctrll       keycode 15 = CtrlL_Lock
+       shiftr ctrll       keycode 15 = CtrlL_Lock
+
+# pressing Esc key while in CtrlL lock (but not ShiftR) will release CtrlL lock.
+              ctrll       keycode 1 = CtrlL_Lock
+shiftl        ctrll       keycode 1 = CtrlL_Lock
+              ctrll ctrlr keycode 1 = CtrlL_Lock
+shiftl        ctrll ctrlr keycode 1 = CtrlL_Lock
+
+
+#ShiftR#
+
+# CtrlR: Shift + Ctrl + Super -> ShiftR_Lock
+ctrlr shift control keycode 125 = ShiftR_Lock
+
+                    ctrlr shift control keycode 125 = ShiftR_Lock
+shiftl              ctrlr shift control keycode 125 = ShiftR_Lock
+       shiftr       ctrlr shift control keycode 125 = ShiftR_Lock
+              ctrll ctrlr shift control keycode 125 = ShiftR_Lock
+shiftl shiftr       ctrlr shift control keycode 125 = ShiftR_Lock
+shiftl        ctrll ctrlr shift control keycode 125 = ShiftR_Lock
+       shiftr ctrll ctrlr shift control keycode 125 = ShiftR_Lock
+shiftl shiftr ctrll ctrlr shift control keycode 125 = ShiftR_Lock
+
+# pressing Tab key while only ShiftR lock will release ShiftR lock.
+       shiftr             keycode 15 = ShiftR_Lock
+
+# pressing Esc key while in ShiftR lock will release ShiftR lock.
+       shiftr             keycode 1 = ShiftR_Lock
+shiftl shiftr             keycode 1 = ShiftR_Lock
+       shiftr ctrll       keycode 1 = ShiftR_Lock
+       shiftr       ctrlr keycode 1 = ShiftR_Lock
+shiftl shiftr ctrll       keycode 1 = ShiftR_Lock
+shiftl shiftr       ctrlr keycode 1 = ShiftR_Lock
+       shiftr ctrll ctrlr keycode 1 = ShiftR_Lock
+shiftl shiftr ctrll ctrlr keycode 1 = ShiftR_Lock
+
+
+#Shift#
+
+# CtrlR: Shift + Alt + Super -> Shift_Lock
+## Alt+Super Ctrl+Alt+Super Tab => Shift_Lock
+## Shift+Alt+Super Esc Esc => release Shift_Lock
+### ^- It inverts Shift_Lock so Alt+Super works.
+ctrlr control alt keycode 125 = Shift_Lock
+
+                    ctrlr control alt keycode 125 = Shift_Lock
+shiftl              ctrlr control alt keycode 125 = Shift_Lock
+       shiftr       ctrlr control alt keycode 125 = Shift_Lock
+              ctrll ctrlr control alt keycode 125 = Shift_Lock
+shiftl shiftr       ctrlr control alt keycode 125 = Shift_Lock
+shiftl        ctrll ctrlr control alt keycode 125 = Shift_Lock
+       shiftr ctrll ctrlr control alt keycode 125 = Shift_Lock
+shiftl shiftr ctrll ctrlr control alt keycode 125 = Shift_Lock
+
+                    ctrlr shift control alt keycode 125 = Shift_Lock
+shiftl              ctrlr shift control alt keycode 125 = Shift_Lock
+       shiftr       ctrlr shift control alt keycode 125 = Shift_Lock
+              ctrll ctrlr shift control alt keycode 125 = Shift_Lock
+shiftl shiftr       ctrlr shift control alt keycode 125 = Shift_Lock
+shiftl        ctrll ctrlr shift control alt keycode 125 = Shift_Lock
+       shiftr ctrll ctrlr shift control alt keycode 125 = Shift_Lock
+shiftl shiftr ctrll ctrlr shift control alt keycode 125 = Shift_Lock
+
+# pressing Esc key while in Shift lock will release Shift lock.
+shift shiftl                    keycode 1 = Shift_Lock
+shift        shiftr             keycode 1 = Shift_Lock
+shift               ctrll       keycode 1 = Shift_Lock
+shift                     ctrlr keycode 1 = Shift_Lock
+shift shiftl shiftr             keycode 1 = Shift_Lock
+shift shiftl        ctrll       keycode 1 = Shift_Lock
+shift shiftl              ctrlr keycode 1 = Shift_Lock
+shift        shiftr ctrll       keycode 1 = Shift_Lock
+shift        shiftr       ctrlr keycode 1 = Shift_Lock
+shift               ctrll ctrlr keycode 1 = Shift_Lock
+shift shiftl shiftr ctrll       keycode 1 = Shift_Lock
+shift shiftl shiftr       ctrlr keycode 1 = Shift_Lock
+shift shiftl        ctrll ctrlr keycode 1 = Shift_Lock
+shift        shiftr ctrll ctrlr keycode 1 = Shift_Lock
+shift shiftl shiftr ctrll ctrlr keycode 1 = Shift_Lock
+
+# pressing Tab key while in Shift lock will release other modifiers
+## in Cr|Sl|Cl|Sr] order, Tab is Pop.
+shift                     ctrlr keycode 15 = CtrlR_Lock
+shift shiftl              ctrlr keycode 15 = CtrlR_Lock
+shift        shiftr       ctrlr keycode 15 = CtrlR_Lock
+shift               ctrll ctrlr keycode 15 = CtrlR_Lock
+shift shiftl shiftr       ctrlr keycode 15 = CtrlR_Lock
+shift shiftl        ctrll ctrlr keycode 15 = CtrlR_Lock
+shift        shiftr ctrll ctrlr keycode 15 = CtrlR_Lock
+shift shiftl shiftr ctrll ctrlr keycode 15 = CtrlR_Lock
+shift shiftl                    keycode 15 = ShiftL_Lock
+shift shiftl shiftr             keycode 15 = ShiftL_Lock
+shift shiftl        ctrll       keycode 15 = ShiftL_Lock
+shift shiftl shiftr ctrll       keycode 15 = ShiftL_Lock
+shift               ctrll       keycode 15 = CtrlL_Lock
+shift        shiftr ctrll       keycode 15 = CtrlL_Lock
+shift        shiftr             keycode 15 = ShiftR_Lock
+shift                           keycode 15 = Meta_Tab
+
+
+
+## Using function keys F1, F2, F3, F4 for knowing lock state
+# of ShiftL, ShiftR, CtrlL and CtrlR modifier.
+#  F243  |  F244  |  F245 |  F246 #
+# ShiftL | ShiftR | CtrlL | CtrlR #
+#        |        |       |       | No CtrlR Lock (cant view state of others)
+#   o    |    *   |   *   |   o   | ShiftL, CtrlR, etc,.
+#   *    |    o   |   *   |   o   | ShiftR, CtrlR, etc,.
+#   *    |    *   |   o   |   o   | CtrlL,  CtrlR, etc,.
+#   o    |    x   |   x   |   o   | ShiftL and CtrlR
+#   x    |    o   |   x   |   o   | ShiftR and CtrlR
+#   x    |    x   |   o   |   o   | CtrlL  and CtrlR
+#   o    |    o   |   x   |   o   | ShiftL and ShiftR and CtrlR
+# etc,.
+#YET2DO
+
+## Using function keys F5, F6, F7, F8 for toggling locks
+#YET2DO
+
+## Using `~ key to view state of ShiftL, ShiftR, CtrlL and CtrlR modifier.
+shiftl                    keycode 41 = one
+       shiftr             keycode 41 = two
+              ctrll       keycode 41 = three
+                    ctrlr keycode 41 = four
+shiftl shiftr             keycode 41 = five
+shiftl        ctrll       keycode 41 = six
+shiftl              ctrlr keycode 41 = seven
+       shiftr ctrll       keycode 41 = eight
+       shiftr       ctrlr keycode 41 = nine
+              ctrll ctrlr keycode 41 = a
+shiftl shiftr ctrll       keycode 41 = b
+shiftl shiftr       ctrlr keycode 41 = c
+shiftl        ctrll ctrlr keycode 41 = d
+       shiftr ctrll ctrlr keycode 41 = e
+shiftl shiftr ctrll ctrlr keycode 41 = f
+shiftl                    shift keycode 41 = g
+       shiftr             shift keycode 41 = h
+              ctrll       shift keycode 41 = i
+                    ctrlr shift keycode 41 = j
+shiftl shiftr             shift keycode 41 = k
+shiftl        ctrll       shift keycode 41 = l
+shiftl              ctrlr shift keycode 41 = m
+       shiftr ctrll       shift keycode 41 = n
+       shiftr       ctrlr shift keycode 41 = o
+              ctrll ctrlr shift keycode 41 = p
+shiftl shiftr ctrll       shift keycode 41 = q
+shiftl shiftr       ctrlr shift keycode 41 = r
+shiftl        ctrll ctrlr shift keycode 41 = s
+       shiftr ctrll ctrlr shift keycode 41 = t
+shiftl shiftr ctrll ctrlr shift keycode 41 = u
