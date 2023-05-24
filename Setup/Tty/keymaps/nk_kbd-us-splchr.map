@@ -4,7 +4,8 @@
 
 #KEYMAPS: 0, 1, 4, 5
 # Plain, Shift, Ctrl, Shift+Ctrl
-alt_is_meta
+#alt_is_meta
+#META_: alt
 
 #   !   @   #   $   %       ^   &   *   (   )   # other special chars.
 #################################################

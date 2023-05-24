@@ -9,7 +9,12 @@
 
 #PATH:
 
+import os
 import re
+
+HOME_DIR = os.environ['HOME'] + '/'
+NK_DIR = HOME_DIR + 'nk/'
+TTY_SETUP_DIR = NK_DIR + 'Setup/Tty/'
 
 KEYSYM = re.compile(r'(0x[0-9abcdef]{4})\t([0-9a-zA-Z_-]+)')
 KEYSYM_SYNONYMS = re.compile(r'([0-9a-zA-Z_-]+) +for +([0-9a-zA-Z_-]+)')
@@ -34,7 +39,7 @@ def get_modifiers(w):
     return ' '.join(modifiers)
 
 
-with open('./docs/dumpkeys-l_notes') as f:
+with open(TTY_SETUP_DIR + 'docs/dumpkeys-l_notes') as f:
     dl = f.read().splitlines()
 
 keysyms = []
@@ -44,6 +49,56 @@ for i in dl:
         keysyms.append(m.groups())
     elif m:=KEYSYM_SYNONYMS.match(i) :
         keysym_synonyms.append(m.groups())
+
+
+def do_skiplines(skips:list[int|str], lines:list[str]):
+    for i,n in skips:
+        if type(n) == int:
+            if n > 0:
+                lines[i:i+n+1] = [None]*(n+1)
+            elif n < 0:
+                lines[i+n:i+1] = [None]*(-n+1)
+            else: # n==0 # Just to skip the #SKIPLINES:...
+                lines[i] = None
+        elif n == 'AllAbove':
+            lines[:i+1] = [None]*(i+1)
+        else: # n=='AllBelow'
+            lines[i:] = [None]*len(lines[i:])
+    
+    return [x for x in lines if x is not None]
+
+def skiplines():
+    for file in os.listdir(TTY_SETUP_DIR + 'keymaps/'):
+        if os.path.isdir(TTY_SETUP_DIR + 'keymaps/' + file):
+            continue
+        with open(TTY_SETUP_DIR + 'keymaps/' + file) as f:
+            lines = f.read().splitlines(keepends=True)
+        skiplines = []
+        for i, line in enumerate(lines):
+            if line.startswith('#SKIPLINES:'):
+                n = line.split()[0][11:]
+                if n == '': n = 'AllBelow'
+                elif n == '-': n = 'AllAbove'
+                elif n.isdigit(): n = int(n)
+                elif n.startswith('-') and n[1:].isdigit(): n = int(n)
+                elif n in ('AllBelow', 'AllAbove'): n = n
+                else:
+                    raise LookupError('Mentioned argument is unknown. Acceptable args are:' + \
+                                        "'', 'AllBelow', '-', 'AllAbove', [0-9]+, \-[0-9]+")
+                skiplines.append((i, n))
+        lines = do_skiplines(skiplines, lines)
+        with open(TTY_SETUP_DIR + 'keymaps/tmp/' + file, 'w') as f:
+            f.write(''.join(lines))
+
+
+def parse_include_exclude(): pass
+def do_include_exclude(): pass
+def include_exclude(lines:list[str]):
+    lines_out = []
+
+    #YET2DO
+
+    return lines_out
 
 
 def keymaps_line(kml:list[int], lines:list[str]) :
@@ -112,7 +167,7 @@ def add_meta_for_asciis(meta_:list[str], lines:list[str]):
     return lines_out
 
 
-with open('./keymaps/nk_kbd-us-alpnum.map') as f:
-    lines = f.read().splitlines()
-
-print('\n'.join(add_meta_for_asciis(['alt', 'altgr'], keymaps_line([0,1,4,5], lines))))
+#with open('./keymaps/nk_kbd-us-alpnum.map') as f:
+#    lines = f.read().splitlines()
+skiplines()
+#print('\n'.join(add_meta_for_asciis(['alt', 'altgr'], keymaps_line([0,1,4,5], lines))))
