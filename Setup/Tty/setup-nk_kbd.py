@@ -1,9 +1,9 @@
 # .map vs .inc
 
-#SKIPLINES:
+#SKIPLINES: done
 
 #nk-kbdmap-include-n-: #nk-kbdmap-exclude-PATTERN:
-#DEFINE:
+#DEFINE: done
 #KEYMAPS: done    (only on .map files, .inc will be pasted then KEYMAPS)
 #META_: done
 
@@ -101,6 +101,26 @@ def include_exclude(lines:list[str]):
     return lines_out
 
 
+def replace_defines(lines:list[str]):
+    lines_out = [] 
+    
+    defines = []
+    for line in lines:
+        if line.startswith('#DEFINE:'):
+            a,b = line[8:].split()[:2]
+            defines.append((re.compile('(?<!\S)'+re.escape(a)+'(?!\S)'), b)) #Look4Doc#
+    
+    for line in lines:
+        if line.startswith('#DEFINE:'):
+            continue # Removing #DEFINE: , as no use after this.
+        if not line.startswith('#'):
+            for pat,rpl in defines:
+                line = pat.sub(rpl, line)
+        lines_out.append(line)
+    
+    return lines_out
+
+
 def keymaps_line(kml:list[int], lines:list[str]) :
     lines_out = []
     for line in lines :
@@ -110,7 +130,7 @@ def keymaps_line(kml:list[int], lines:list[str]) :
             lines_out.append(line); continue
         if not (m:=KEYCODE_MAP.match(line)) :
             lines_out.extend([
-                '#MetaString#',
+                '#MetaString#', #Look4Doc#
                 line.strip()
             ])
             if VERBOSE:
@@ -123,7 +143,7 @@ def keymaps_line(kml:list[int], lines:list[str]) :
             if len(ks) > len(kml):
                 raise LookupError('Keysymbols beyond columns specified in keymapsline.')
             for mk in zip(kml, ks):
-                if mk[1] != 'SKIP':
+                if mk[1] != 'SKIP': #Look4Doc#
                     lines_out.append(f'{get_modifiers(mk[0])} keycode {kc} = {mk[1]}')
         else:
             if len(ks) != 1:
@@ -149,7 +169,7 @@ def add_meta_for_asciis(meta_:list[str], lines:list[str]):
             ms = ' '+ms if ms != 'plain' else ''
             for m_ in meta_:
                 if m_ in ms:
-                    lines_out.insert(-1, '#May overwrite/affected_by Meta Modifiers defined lines#')
+                    lines_out.insert(-1, '#May overwrite/affected_by Meta Modifiers defined lines#') #Look4Doc#
                     if VERBOSE:
                         print('|> #May overwrite/affected_by Meta Modifiers defined lines#')
                         print('|> ' + line)
@@ -166,8 +186,3 @@ def add_meta_for_asciis(meta_:list[str], lines:list[str]):
     
     return lines_out
 
-
-#with open('./keymaps/nk_kbd-us-alpnum.map') as f:
-#    lines = f.read().splitlines()
-skiplines()
-#print('\n'.join(add_meta_for_asciis(['alt', 'altgr'], keymaps_line([0,1,4,5], lines))))
