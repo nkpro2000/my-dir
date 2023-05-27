@@ -7,7 +7,7 @@
 #KEYMAPS: done
 #META_: done
 
-#PATH:
+#PATH: done
 
 import os
 import re
@@ -17,7 +17,6 @@ import shutil
 HOME_DIR = os.environ['HOME'] + '/'
 NK_DIR = HOME_DIR + 'nk/'
 TTY_SETUP_DIR = NK_DIR + 'Setup/Tty/'
-TTY_SETUP_DIR = NK_DIR + 'Lobby/my-dir/Setup/Tty/'
 KEYMAPS_DIR = TTY_SETUP_DIR + 'keymaps/'
 KEYMAPS_TMP_DIR = TTY_SETUP_DIR + 'keymaps/tmp/'
 DEFAULT_KBD_KEYMAP_DIR = '/usr/share/kbd/keymaps/'
@@ -294,12 +293,12 @@ script = r'''
 cd '''+ KEYMAPS_TMP_DIR+'out/' + r'''
 
 for file in $(find ./ -type f -name '*.map'| cut -d. -f2-); do
-    gzip "./$file" && mv "./${file}.gz" "${file}.gz"
-    #mv "./$file" "$file"
+    #gzip "./$file" && cp "./${file}.gz" "${file}.gz"
+    cp "./$file" "$file"
 done
 
 for file in $(find ./ -type f -name '*.inc'| cut -d. -f2-); do
-    mv "./$file" "$file"
+    cp "./$file" "$file"
 done
 
 '''
