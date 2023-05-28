@@ -119,7 +119,7 @@ shiftl shiftr ctrll ctrlr keycode 1 = ShiftR_Lock
 
 #Shift#
 
-# CtrlR: Shift + Alt + Super -> Shift_Lock
+# CtrlR: Ctrl + Alt + Super -> Shift_Lock
 ## Alt+Super Ctrl+Alt+Super Tab => Shift_Lock
 ## Shift+Alt+Super Esc Esc => release Shift_Lock
 ### ^- It inverts Shift_Lock so Alt+Super works.
