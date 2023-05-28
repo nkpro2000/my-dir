@@ -3,11 +3,11 @@
 #SKIPLINES: done
 
 #nk-kbdmap-include-n-: #nk-kbdmap-exclude-PATTERN:
-#DEFINE: done
+#DEFINE: done (line# doesn't matter)
 #KEYMAPS: done
-#META_: done
+#META_: done, enhanced
 
-#PATH: done
+#PATH: done (line# doesn't matter)
 
 import os
 import re
@@ -27,6 +27,8 @@ KEYSYM_SYNONYMS = re.compile(r'([0-9a-zA-Z_-]+) +for +([0-9a-zA-Z_-]+)')
 MODIFIRES = ['shift', 'altgr', 'control', 'alt', 'shiftl', 'shiftr', 'ctrll', 'ctrlr', 'capsshift']
 
 KEYCODE_MAP = re.compile(r'([ a-z]*?)keycode +([0-9]+) += +([ 0-9a-zA-Z+_-]+)')
+META__ARG = re.compile(r'([a-z_]+)([\\/])?([0-9,-]+)?')
+# Use '_' for space. Eg: alt_altgr/0,1 -> alt altgr keycode... \n alt altgr shift keycode... .
 VERBOSE = True
 
 
@@ -42,6 +44,17 @@ def get_modifiers(w:int) -> str:
     modifiers.sort(key= lambda x:modifiers_order[MODIFIRES.index(x)])
 
     return ' '.join(modifiers)
+
+def get_modifiers_weight(ms:str) -> int:
+    if ms=='plain': return 0
+    ms = ms.split()
+    
+    w = 0
+    for i,m in enumerate(MODIFIRES):
+        if m in ms:
+            w += 2**i
+    
+    return w
 
 
 with open(TTY_SETUP_DIR + 'docs/dumpkeys-l_notes') as f:
@@ -159,7 +172,7 @@ def keymaps_line(kml:list[int], lines:list[str]) -> list[str]:
     
     return lines_out
 
-def add_meta_for_asciis(meta_:list[str], lines:list[str]) -> list[str]:
+def add_meta_for_asciis(meta_:list[tuple[str, int,list[int] ]], lines:list[str]) -> list[str]:
     lines_out = []
     for line in lines:
         if (m:=KEYCODE_MAP.match(line)) :
@@ -174,7 +187,7 @@ def add_meta_for_asciis(meta_:list[str], lines:list[str]) -> list[str]:
             m_k = ks[0].lstrip('+')
             ms = ms.strip()
             ms = ' '+ms if ms != 'plain' else ''
-            for m_ in meta_:
+            for m_,_,_ in meta_:
                 if m_ in ms:
                     lines_out.insert(-1, '#May overwrite/affected_by Meta Modifiers defined lines#') #Look4Doc#
                     if VERBOSE:
@@ -186,8 +199,15 @@ def add_meta_for_asciis(meta_:list[str], lines:list[str]) -> list[str]:
                     if s[0] == m_k:
                         m_k = s[1]
                 if f'Meta_{m_k}' in (x[1] for x in keysyms):
-                    for m_ in meta_:
-                        lines_out.append(f'  {m_}{ms} keycode {kc} = Meta_{m_k}')
+                    for m_,ioe,mw in meta_:
+                        if ioe == 0: # Just add meta                           #Look4Doc#
+                            lines_out.append(f'  {m_}{ms} keycode {kc} = Meta_{m_k}')
+                        elif ioe == 1: # Only include for these modifier weights
+                            if get_modifiers_weight(ms) in mw:
+                                lines_out.append(f'  {m_}{ms} keycode {kc} = Meta_{m_k}')
+                        else: # ioe == 2 Only exclude for these modifier weights
+                            if get_modifiers_weight(ms) not in mw:
+                                lines_out.append(f'  {m_}{ms} keycode {kc} = Meta_{m_k}')
         else:
             lines_out.append(line)
     
@@ -246,7 +266,25 @@ for file in os.listdir(KEYMAPS_TMP_DIR):
     meta_lines = [(None, [])]
     for i, line in enumerate(lines):
         if line.startswith('#META_:'):
-            meta_lines.append((i, line[7:].split())) #Look4Doc#
+            meta_lines.append((i, []))
+            try:
+                for meta_ in line[7:].split():
+                    m_,ioe,mw_ = META__ARG.match(meta_).groups()   #Look4Doc#
+                    m_ = m_.replace('_', ' ')
+                    ioe = [None,'/','\\'].index(ioe)
+                    mw = []
+                    if mw_ is not None and ioe != 0:
+                        for c in mw_.split(','):
+                            if (r:=c.find('-')) != -1:
+                                mw.extend(range(int(c[:r]), int(c[r+1:])+1))
+                            else:
+                                mw.append(int(c))
+                    elif ioe != 0:
+                        raise LookupError('Why giving weights, if not specified either only{include,exclude}')
+                    meta_lines[-1][1].append((m_,ioe,mw))
+            except Exception as e:
+                print(f'?> Error : {e} \n?> \'-> Caused by line : {line}')
+                raise e
     ### * Mention range for #META_: .
     for i, to_ in enumerate(meta_lines[1:]+[(None, None)]):
         from_ = meta_lines[i][0]
