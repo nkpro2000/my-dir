@@ -82,6 +82,7 @@
 
 import re
 import os
+import toml
 
 # Adding nk to user-places
 ###########################
@@ -187,6 +188,27 @@ set_folder_icon(NK_DIR_FILE, NK_ICON)
 set_folder_icon(DEV_DIR_FILE, DEV_ICON)
 set_folder_icon(NOTES_DIR_FILE, NOTES_ICON)
 set_folder_icon(SETUP_DIR_FILE, SETUP_ICON)
+
+SETUP_DOLPHIN = NK_DIR + 'Setup/Dolphin/'
+with open(SETUP_DOLPHIN+'dirs-icon.toml') as file:
+    dirs_icon = toml.load(file)
+
+def get_path_icon (dirs_icon):
+    l=[]
+    for i in dirs_icon.values():
+        if 'path' in i.keys():
+            l.append(i)
+        else:
+            l.extend(get_path_icon(i))
+    return l
+
+for i in get_path_icon(dirs_icon['nk']):
+    set_folder_icon(NK_DIR+i['path']+'/.directory', i['icon'])
+    os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{NK_DIR+i['path']+'/.directory'}'")
+
+for i in get_path_icon(dirs_icon['home']):
+    set_folder_icon(HOME_DIR+i['path']+'/.directory', i['icon'])
+    os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{HOME_DIR+i['path']+'/.directory'}'")
 
 # Adding nk-profile
 ####################
