@@ -2,7 +2,7 @@
 # Used like:
 """
 >>> import sys, pathlib
->>> sys.path.append(f'{pathlib.Path.home()}/nk/.53c2375')
+>>> sys.path.append(f'{pathlib.Path.home()}/nk/.secrets')
 >>> from secret5 import *
 """
 

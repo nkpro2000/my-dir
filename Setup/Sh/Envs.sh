@@ -14,35 +14,23 @@ export JUPYTER_DATA_DIR="$HOME/nk/Dev/jupyter/data"
 #jupyterDir}
 
 #flutter{
+export PUB_CACHE="$HOME/.pub-cache"
+
 export ANDROID_HOME=/opt/android-sdk
 export CHROME_EXECUTABLE=/opt/google/chrome/google-chrome
 #flutter}
 
 
+echo "pf $0"
+
 ## Envs needed to be loaded on non-login shell
 ### Above Envs always loaded
 else
 
-#$ sudo tree /mnt/Extended/LinuxExtRoot -pug --metafirst
-# [drwxr-xr-x root  root ]  /mnt/Extended/LinuxExtRoot
-# [drwxr-xr-x root  root ]  ├── home
-# [drwx------ nkpro nkpro]  │   └── nkpro
-# [drwxrwxrwt root  root ]  ├── thome
-# [drwx------ nkpro nkpro]  │   ├── nkpro_darling
-# [drwxr-xr-x nkpro nkpro]  │   │   ├── darling_src_repo
-# [-rw-r--r-- nkpro nkpro]  │   │   └── init.sh
-# [drwx------ nkpro nkpro]  │   ├── nkpro_droid
-# [drwx------ nkpro nkpro]  │   └── nkpro_wine
-# [drwxrwxrwt root  root ]  ├── tusr
-# [drwxr-xr-x nkpro nkpro]  │   ├── nkpro_darling
-# [drwxr-xr-x nkpro nkpro]  │   └── nkpro_droid
-# [drwxr-xr-x root  root ]  └── var
-# [drwxr-xr-x root  root ]      └── cache
-# [drwxr-xr-x root  root ]          └── pacman
+echo "rc $0"
 
-#darling{
-export DPREFIX="/mnt/Extended/LinuxExtRoot/thome/${USER}_darling/.darling"
-#darling}
+
+. "${HOME}/nk/.secrets/.53c2375.sh"
 
 
 fi

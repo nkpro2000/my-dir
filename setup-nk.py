@@ -5,75 +5,88 @@
 """ $ tree -aF ~/nk
 ~/nk/
 :
-├── .53c2375/       #TODO Think about better method to store secrets
-│   ├── secret5.sh
-│   ├── secret5.py
-│   :
 ├── .assets/
-│   ├── NewK.ico
-│   ├── Dev.ico
-│   ├── Dev.png
-│   ├── Notes.ico
-│   ├── Notes.png
-│   ├── nk_.ico
-│   ├── nk_.png
-│   ├── .others/
-│   :
+│   ├── NewK.ico
+│   ├── Dev.ico
+│   ├── Dev.png
+│   ├── Notes.ico
+│   ├── Notes.png
+│   ├── nk_.ico
+│   ├── nk_.png
+│   ├── .others/
+│   :
 ├── .logs/
-│   :
+│   :
+├── .secrets/       #TODO Think about better method to store secrets
+│   ├── .gen
+│   ├── secret5.sh
+│   ├── secret5.py
+│   :
 ├── Dev/
-│   ├── .ssh/
-│   │   :
-│   ├── bin/
-│   │   ├── .path
-│   │   ├── .generate_path
-│   │   ├── code -> ../code/bin/
-│   │   :
-│   ├── code -> <any_code_editor>/
-│   │   :
-│   ├── code-data/
-│   │   :
-│   ├── <any_code_editor>/ (eg: VScodium)
-│   │   ├── bin/
-│   │   │   :
-│   │   ├── data -> ../code-data/ (for Portability)
-│   │   :
-│   ├── Envs/
-│   │   ├── Github.sh
-│   │   ├── Python.sh
-│   │   ├── Shell.sh
-│   │   :
-│   ├── jupyter/
-│   │   ├── config/
-│   │   │   :
-│   │   ├── data/
-│   │   │   :
-│   │   :
-│   ├── lobby/
-│   │   :
-│   ├── .directory
-│   :
+│   ├── .ssh/
+│   │   :
+│   ├── bin/
+│   │   ├── .path
+│   │   ├── .generate_path
+│   │   ├── code -> ../code/bin/
+│   │   ├── flutter -> ../flutter/bin/
+│   │   :
+│   ├── code -> <any_code_editor>/
+│   │   :
+│   ├── code-data/
+│   │   ├── data -> ../code-data/ (to copy into code/)
+│   │   :
+│   ├── <any_code_editor>/ (eg: VScodium)
+│   │   ├── bin/
+│   │   │   :
+│   │   ├── data -> ../code-data/ (for Portability)
+│   │   :
+│   ├── Envs/
+│   │   ├── Github.sh
+│   │   ├── Net.sh
+│   │   ├── Python.sh
+│   │   ├── Shell.sh
+│   │   :
+│   ├── flutter/
+│   │   ├── bin/
+│   │   │   ├── cache/
+│   │   │   │   :
+│   │   │   :
+│   │   :
+│   ├── jupyter/
+│   │   ├── config/
+│   │   │   :
+│   │   ├── data/
+│   │   │   :
+│   │   :
+│   ├── lobby/
+│   │   :
+│   ├── .directory
+│   :
 ├── Notes/
-│   ├── .directory
-│   :
+│   ├── .directory
+│   :
 ├── Setup/
-│   ├── Panel/
-│   │   ├── Scripts/
-│   │   │   :
-│   │   :
-│   ├── Sh
-│   │   ├── zm_nk-profile.sh
-│   │   ├── nk-profile.sh
-│   │   ├── nk-profile.sh_notes
-│   │   ├── nk-profile.sh_notes2
-│   │   ├── nk-rcfile.sh
-│   │   ├── Envs.sh
-│   │   ├── Envs/
-│   │   │   ├── PYTHONPATH.sh
-│   │   │   :
-│   │   :
-│   ├── .directory
-│   :
+│   ├── Dolphin/
+│   │   ├── dirs-icon.toml
+│   │   :
+│   ├── Panel/
+│   │   ├── Scripts/
+│   │   │   :
+│   │   :
+│   ├── Sh
+│   │   ├── zm_nk-profile.sh
+│   │   ├── nk-profile.sh
+│   │   ├── nk-profile.sh_notes
+│   │   ├── nk-profile.sh_notes2
+│   │   ├── nk-rcfile.sh
+│   │   ├── Envs.sh
+│   │   ├── Envs/
+│   │   │   ├── PYTHONPATH.sh
+│   │   │   :
+│   │   :
+│   ├── .directory
+│   :
 ├── nk.py
 ├── setup-nk.py
 ├── .directory

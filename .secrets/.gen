@@ -1,0 +1,7 @@
+#! /bin/bash
+# This generates the other formats of secret files.
+# This script only used to create other secrets files (.xxx.py, .xxx.json, ...)
+# from ~/nk/.secrets/.xxx.sh for covering other means of getting secrets.
+# Will be run like `.gen xxx` from shell after updating ~/nk/.secrets/.xxx.sh .
+
+# Yet2Do

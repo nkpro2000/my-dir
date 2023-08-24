@@ -4,10 +4,12 @@
 # https://git-scm.com/docs/gitignore
 
 
-# Not to upload other secrets [secret5.{sh,py} will not be ignored since it is already tracked]
-/.53c2375/**
 # Some other assets (Like icons used for panel widgets)
 /.assets/.others/
+# Just some logs
+/.logs/
+# Not to upload other secrets [.gen secret5.{sh,py} will not be ignored since it is already tracked]
+/.secrets/**
 # It is populated
 /Dev/code-data/**
 /Dev/lobby/**
@@ -50,31 +52,34 @@ __pycache__/
 /Bored/
 /Things/
 
-### Temporary ###
-# By nk.py (uncommitted version)
-/.logs/
-
 
 ## Testing repo
 # ~/nk >>> git ls-files | column                                      ±[●][master]
-# .53c2375/secret5.py                     Dev/bin/.generate_path
-# .53c2375/secret5.sh                     Dev/bin/.path
-# .assets/Dev.ico                         Dev/bin/code
-# .assets/Dev.png                         Dev/code
-# .assets/NK.ico                          Dev/code-data/.gitkeep
-# .assets/NK.png                          Dev/lobby/.gitkeep
-# .assets/NewK.ico                        Notes/.gitkeep
-# .assets/Notes.ico                       Setup/Panel/Scripts/.gitkeep
-# .assets/Notes.png                       Setup/Sh/Envs.sh
-# .assets/nk.ico                          Setup/Sh/Envs/PYTHONPATH.sh
-# .assets/nk.png                          Setup/Sh/nk-profile.sh
-# .assets/nk_.ico                         Setup/Sh/nk-profile.sh_notes
-# .assets/nk_.png                         Setup/Sh/nk-profile.sh_notes2
-# .gitignore                              Setup/Sh/nk-rcfile.sh
-# Dev/<any_code_editor>/bin/.gitkeep      Setup/Sh/zm_nk-profile.sh
-# Dev/<any_code_editor>/data              nk.py
-# Dev/Envs/Github.sh                      setup-nk.py
-# Dev/Envs/Python.sh
+# .assets/Dev.ico                         Dev/code-data/.gitkeep
+# .assets/Dev.png                         Dev/lobby/.gitkeep
+# .assets/NK.ico                          Notes/.gitkeep
+# .assets/NK.png                          Setup/Dolphin/dirs-icon.toml
+# .assets/NewK.ico                        Setup/Panel/Scripts/.gitkeep
+# .assets/Notes.ico                       Setup/Sh/Envs.sh
+# .assets/Notes.png                       Setup/Sh/Envs/PYTHONPATH.sh
+# .assets/nk.ico                          Setup/Sh/nk-profile.sh
+# .assets/nk.png                          Setup/Sh/nk-profile.sh_notes
+# .assets/nk_.ico                         Setup/Sh/nk-profile.sh_notes2
+# .assets/nk_.png                         Setup/Sh/nk-rcfile.sh
+# .gitignore                              Setup/Sh/zm_nk-profile.sh
+# .secrets/.gen                           Setup/Tty/docs/dumpkeys-_notes
+# .secrets/secret5.py                     Setup/Tty/docs/dumpkeys-l_notes
+# .secrets/secret5.sh                     Setup/Tty/docs/dumpkeys_notes
+# .unsat                                  Setup/Tty/docs/loadkeys_notes.md
+# Dev/<any_code_editor>/bin/.gitkeep      Setup/Tty/keymaps/nk_kbd-header.inc
+# Dev/<any_code_editor>/data              Setup/Tty/keymaps/nk_kbd-shctlr.map
+# Dev/Envs/Github.sh                      Setup/Tty/keymaps/nk_kbd-us-alpnum.map
+# Dev/Envs/Python.sh                      Setup/Tty/keymaps/nk_kbd-us-splchr.map
+# Dev/Envs/Shell.sh                       Setup/Tty/keymaps/nk_kbd-us.map_notes
+# Dev/bin/.generate_path                  Setup/Tty/setup-nk_kbd.py
+# Dev/bin/.path                           nk.py
+# Dev/bin/code                            setup-nk.py
+# Dev/code
 
 ## Testing .gitignore
 # ~/nk >>> find . -path './.git' -prune -o -type d -printf '%p/\n' -o -print | sort | while if [ -z "$i" ]; then IFS= read -r i; fi; do

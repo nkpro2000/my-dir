@@ -46,13 +46,6 @@ else NK_PROFILE_RETURN_1='1'
 fi; NK_PROFILE_RETURN="[${NK_PROFILE_RETURN_1},1,1]"
 
 
-## Adding nk/.53c2375 Secrets to ENV
-#####################################
-
-# Just add it in specific programming language environments
-# Eg: adding ~/nk/.53c2375 to PYTHONPATH by adding it in ~/nk/Setup/Sh/Envs/PYTHONPATH.sh
-
-
 ## Adding Environmental Variables
 ##################################
 
