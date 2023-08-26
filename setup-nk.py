@@ -28,18 +28,20 @@
 │   ├── bin/
 │   │   ├── .path
 │   │   ├── .generate_path
-│   │   ├── code -> ../code/bin/
-│   │   ├── flutter -> ../flutter/bin/
-│   │   :
-│   ├── code -> <any_code_editor>/
-│   │   :
-│   ├── code-data/
-│   │   ├── data -> ../code-data/ (to copy into code/)
-│   │   :
-│   ├── <any_code_editor>/ (eg: VScodium)
-│   │   ├── bin/
+│   │   ├── code -> <any_code_editor>
+│   │   ├── <any_code_editor>/ (eg: VScodium)
+│   │   │   ├── bin/
+│   │   │   │   :
+│   │   │   ├── data -> ../../code/data (for Portability)
 │   │   │   :
-│   │   ├── data -> ../code-data/ (for Portability)
+│   │   ├── flutter/
+│   │   │   ├── bin/
+│   │   │   │   ├── cache/
+│   │   :   :   :   :
+│   ├── code/
+│   │   ├── data/
+│   │   │   ├── data -> ../../code/data
+│   │   │   :           (to copy back to ../../bin/code/)
 │   │   :
 │   ├── Envs/
 │   │   ├── Github.sh
@@ -47,17 +49,14 @@
 │   │   ├── Python.sh
 │   │   ├── Shell.sh
 │   │   :
-│   ├── flutter/
-│   │   ├── bin/
-│   │   │   ├── cache/
-│   │   │   │   :
-│   │   │   :
-│   │   :
 │   ├── jupyter/
-│   │   ├── config/
+│   │   ├── .pyvenv/ ...
+│   │   ├── bin/
+│   │   │   ├── jupy
 │   │   │   :
-│   │   ├── data/
-│   │   │   :
+│   │   ├── config/ ...
+│   │   ├── data/ ...
+│   │   ├── sage/ ...
 │   │   :
 │   ├── lobby/
 │   │   :
@@ -82,7 +81,8 @@
 │   │   ├── nk-rcfile.sh
 │   │   ├── Envs.sh
 │   │   ├── Envs/
-│   │   │   ├── PYTHONPATH.sh
+│   │   │   ├── PYTHON.sh
+│   │   │   ├── LANGsByGoogle.sh
 │   │   │   :
 │   │   :
 │   ├── .directory
@@ -315,8 +315,8 @@ if os.path.isfile(ZSHRC):
 # Setting CONFIG & DATA dir for Jupyter
 ########################################
 
-os.makedirs(os.path.join(NK_DIR, "Dev/jupyter/config"), exist_ok=True)
-os.makedirs(os.path.join(NK_DIR, "Dev/jupyter/data"), exist_ok=True)
+for i in ['bin', 'config', 'data', 'sage']:
+    os.makedirs(os.path.join(NK_DIR, f"Dev/jupyter/{i}"), exist_ok=True)
 
 # Installing Jupyter and SageMath
 ##################################

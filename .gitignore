@@ -11,14 +11,14 @@
 # Not to upload other secrets [.gen secret5.{sh,py} will not be ignored since it is already tracked]
 /.secrets/**
 # It is populated
-/Dev/code-data/**
+/Dev/code/data/**
 /Dev/lobby/**
 /Dev/jupyter/
 # Not to upload
 /Dev/.ssh/
 # Tools for Dev
-/Dev/bin/flutter
-/Dev/VSCode-linux-x64/
+/Dev/bin/flutter/
+/Dev/bin/VSCode-linux-x64/
 # Better to be in local
 /Notes/*
 # May upload in other repos
@@ -55,7 +55,7 @@ __pycache__/
 
 ## Testing repo
 # ~/nk >>> git ls-files | column                                      ±[●][master]
-# .assets/Dev.ico                         Dev/code-data/.gitkeep
+# .assets/Dev.ico                         Dev/code/data/.gitkeep
 # .assets/Dev.png                         Dev/lobby/.gitkeep
 # .assets/NK.ico                          Notes/.gitkeep
 # .assets/NK.png                          Setup/Dolphin/dirs-icon.toml
@@ -71,15 +71,14 @@ __pycache__/
 # .secrets/secret5.py                     Setup/Tty/docs/dumpkeys-l_notes
 # .secrets/secret5.sh                     Setup/Tty/docs/dumpkeys_notes
 # .unsat                                  Setup/Tty/docs/loadkeys_notes.md
-# Dev/<any_code_editor>/bin/.gitkeep      Setup/Tty/keymaps/nk_kbd-header.inc
-# Dev/<any_code_editor>/data              Setup/Tty/keymaps/nk_kbd-shctlr.map
-# Dev/Envs/Github.sh                      Setup/Tty/keymaps/nk_kbd-us-alpnum.map
-# Dev/Envs/Python.sh                      Setup/Tty/keymaps/nk_kbd-us-splchr.map
-# Dev/Envs/Shell.sh                       Setup/Tty/keymaps/nk_kbd-us.map_notes
-# Dev/bin/.generate_path                  Setup/Tty/setup-nk_kbd.py
-# Dev/bin/.path                           nk.py
+# Dev/Envs/Github.sh                      Setup/Tty/keymaps/nk_kbd-header.inc
+# Dev/Envs/Python.sh                      Setup/Tty/keymaps/nk_kbd-shctlr.map
+# Dev/Envs/Shell.sh                       Setup/Tty/keymaps/nk_kbd-us-alpnum.map
+# Dev/bin/.generate_path                  Setup/Tty/keymaps/nk_kbd-us-splchr.map
+# Dev/bin/.path                           Setup/Tty/keymaps/nk_kbd-us.map_notes
+# Dev/bin/<any_code_editor>/bin/.gitkeep  Setup/Tty/setup-nk_kbd.py
+# Dev/bin/<any_code_editor>/data          nk.py
 # Dev/bin/code                            setup-nk.py
-# Dev/code
 
 ## Testing .gitignore
 # ~/nk >>> find . -path './.git' -prune -o -type d -printf '%p/\n' -o -print | sort | while if [ -z "$i" ]; then IFS= read -r i; fi; do
@@ -88,10 +87,6 @@ __pycache__/
 # done
 # O ./
 # O ./if_have_some_file
-# O ./.53c2375/
-# X ./.53c2375/if_have_some_file
-# O ./.53c2375/secret5.py
-# O ./.53c2375/secret5.sh
 # O ./.assets/
 # O ./.assets/if_have_some_file
 # O ./.assets/Dev.ico
@@ -165,14 +160,20 @@ __pycache__/
 # X ./Pbco/
 # X ./Pbco/if_have_some_file
 # X ./Pbco/somefile
-# X ./.pytest_cache/
-# X ./.pytest_cache/if_have_some_file
+# X ./Psco/
+# X ./Psco/if_have_some_file
+# X ./Psco/somefile
 # X ./Sbco/
 # X ./Sbco/if_have_some_file
 # X ./Sbco/somefile
+# O ./.secrets/                        (Possibly:: find: ‘./.secrets’: Permission denied)
+# X ./.secrets/if_have_some_file
 # O ./Setup/
 # O ./Setup/if_have_some_file
 # X ./Setup/.directory
+# O ./Setup/Dolphin/
+# O ./Setup/Dolphin/if_have_some_file
+# O ./Setup/Dolphin/dirs-icon.toml
 # O ./setup-nk.py
 # O ./Setup/Panel/
 # O ./Setup/Panel/if_have_some_file

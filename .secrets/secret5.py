@@ -11,6 +11,10 @@ import shlex
 
 #TODO better to have secrets in seprate file and secret5.{sh,py} will parse and export them
 
+# Yet2Do
+## import xxx.py
+### and give variables AS globals OR single dict OR single object OR yet2think
+
 dirname = os.path.dirname(os.path.realpath(__file__))
 with open(os.path.join(dirname, 'secret5.sh'), 'r') as f:
     envs = f.read().replace('export ', '')
