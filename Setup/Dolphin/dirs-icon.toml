@@ -66,6 +66,21 @@ id.icon='folder-root'
 Fixes.path='Fixes'
 Fixes.icon='folder-script'
 
+# nk/Dev
+
+[nk-Dev.bin]
+path='bin'
+icon='folder-appimage'
+[nk-Dev.Envs]
+path='Envs'
+icon='folder-script'
+
+# nk/Notes
+
+[nk-Notes.bin]
+path='bin'
+icon='folder-appimage'
+
 # ~
 
 [home.tasks]

@@ -56,8 +56,17 @@
 │   │   │   :
 │   │   ├── config/ ...
 │   │   ├── data/ ...
+│   │   ├── py/ ...
+│   │   ├── ipy/ ...
+│   │   ├── mpl/ ...
 │   │   ├── sage/ ...
 │   │   :
+│   ├── google/
+│   │   ├── dart/
+│   │   │   ├── flutter/
+│   │   │   :   :
+│   │   ├── go/
+│   │   :   :
 │   ├── lobby/
 │   │   :
 │   ├── .directory
@@ -219,6 +228,14 @@ for i in get_path_icon(dirs_icon['nk']):
     set_folder_icon(NK_DIR+i['path']+'/.directory', i['icon'])
     os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{NK_DIR+i['path']+'/.directory'}'")
 
+for i in get_path_icon(dirs_icon['nk-Dev']):
+    set_folder_icon(NK_DIR+'Dev/'+i['path']+'/.directory', i['icon'])
+    os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{NK_DIR+'Dev/'+i['path']+'/.directory'}'")
+
+for i in get_path_icon(dirs_icon['nk-Notes']):
+    set_folder_icon(NK_DIR+'Notes/'+i['path']+'/.directory', i['icon'])
+    os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{NK_DIR+'Notes/'+i['path']+'/.directory'}'")
+
 for i in get_path_icon(dirs_icon['home']):
     set_folder_icon(HOME_DIR+i['path']+'/.directory', i['icon'])
     os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{HOME_DIR+i['path']+'/.directory'}'")
@@ -315,14 +332,19 @@ if os.path.isfile(ZSHRC):
 # Setting CONFIG & DATA dir for Jupyter
 ########################################
 
-for i in ['bin', 'config', 'data', 'sage']:
+for i in ['bin', 'config', 'data', 'py', 'ipy', 'mpl', 'sage']:
     os.makedirs(os.path.join(NK_DIR, f"Dev/jupyter/{i}"), exist_ok=True)
+
+# Setting dirs related to Google langs and others
+##################################################
+
+for i in ['dart/flutter', 'go']:
+    os.makedirs(os.path.join(NK_DIR, f"Dev/google/{i}"), exist_ok=True)
 
 # Installing Jupyter and SageMath
 ##################################
 
-os.system('sudo pacman -S jupyter{,lab,-notebook} python-ipykernel')
-os.system('sudo pacman -S sagemath{,-doc,-jupyter} cantor')
+os.system('sudo pacman -S sagemath python-ipykernel')
 
 os.system('sudo -K')
 
