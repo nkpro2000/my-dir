@@ -1,0 +1,27 @@
+{
+ "argv": [
+  "~/nk/Dev/jupyter/py/venv/bin/python",
+  "-m",
+  "ipykernel_launcher",
+  "-f",
+  "{connection_file}"
+ ],
+ "env": {
+  "VIRTUAL_ENV": "${HOME}/nk/Dev/jupyter/py/venv",
+  "PATH": "${HOME}/nk/Dev/jupyter/py/venv/bin:${PATH}",
+  "PYTHONHOME":""
+ },
+ "display_name": "Python 3 Venv (ipykernel)",
+ "language": "python",
+ "metadata": {
+  "debugger": true
+ },
+ "_comment": [
+  "# This file",
+  " https://jupyter-client.readthedocs.io/en/stable/kernels.html#kernel-specs",
+  "# Procedure",
+  " sh> python -m venv --copies --clear --upgrade-deps --prompt PYvenv ./venv",
+  " sh> . ./venv/bin/activate",
+  " sh> pip install ipykernel"
+ ]
+}

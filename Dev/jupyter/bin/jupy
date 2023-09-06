@@ -1,0 +1,28 @@
+#!/bin/sh
+# execute in Jupyter Env
+
+## Activate python venv
+. "$HOME/nk/Dev/jupyter/.pyvenv/bin/activate"
+
+## Envs
+#jupyterDir{
+export JUPYTER_CONFIG_DIR="$HOME/nk/Dev/jupyter/config"
+#export JUPYTER_CONFIG_PATH ##Set this environment variable to provide extra directories for the config search path.
+export JUPYTER_DATA_DIR="$HOME/nk/Dev/jupyter/data"
+export JUPYTER_PATH="$HOME/nk/Dev/jupyter/py/jupyter-data"
+## Set this environment variable to provide extra directories for the data search path.
+#jupyterDir} https://docs.jupyter.org/en/latest/use/jupyter-directories.html
+#iPythonDir{
+export IPYTHONDIR="$HOME/nk/Dev/jupyter/ipy"
+#iPythonDir} https://ipython.readthedocs.io/en/stable/development/config.html
+#matPlotLibDir{
+export MPLCONFIGDIR="$HOME/nk/Dev/jupyter/mpl"
+#matPlotLibDir} https://matplotlib.org/stable/users/faq/environment_variables_faq.html
+#sageDir{
+export DOT_SAGE="$HOME/nk/Dev/jupyter/sage"
+#export SAGE_SERVER ##only used for installing packages. Alternative mirror from which to download sources, see the Installation Guide for details.
+#export BROWSER ##on most platforms, Sage will detect the command to run a web browser, but if this doesn’t seem to work on your machine, set this variable to the appropriate command.
+#sageDir} https://doc.sagemath.org/html/en/reference/repl/environ.html
+
+## Finally execute command
+"$@"

@@ -1,0 +1,83 @@
+#!/bin/sh
+# execute in Tex Env
+
+# https://texfaq.org/FAQ-TeXpronounce
+## The “X” is “really” the Greek letter Chi, and is pronounced by English-speakers either
+##  a bit like the “ch” in the Scots word “loch” ([x] in the IPA) or (at a pinch, if you can’t do the Greek sound) like “k”.
+##  It definitely is not pronounced “ks” (the Greek letter with that sound doesn’t look remotely like the Latin alphabet “X”).
+##                   ^^^^^^^^^^^^^^^^^^^                  So i named this as `teks` instead of `tex`
+
+# https://tug.org/texlive/doc/texlive-en/texlive-en.html
+
+## Envs
+#texLiveDir{
+# /home/nkpro/nk/Dev/tex
+# ├── bin
+# │   └── teks (This file)
+# └── live
+export TEXDIR="$HOME/nk/Dev/tex/live/curr" # TEXMFROOT
+#:::  ├── 2023 (Common)
+
+#     │   ├── bin
+## 
+##   
+export TEXMFDIST="$TEXDIR/texmf-dist"
+export TEXMFMAIN="$TEXMFDIST"
+#     │   ├── texmf-dist
+## TEXMFDIST
+##   The tree which holds nearly all of the ﬁles in the original distribution—conﬁguration ﬁles, scripts, packages, fonts, etc. (The main exceptions are the per-platform executables, which are stored in a sibling directory bin/.)
+export TEXMFSYSCONFIG="$TEXDIR/texmf-config"
+#     │   ├── texmf-config
+## TEXMFSYSCONFIG
+##   The (site-wide) tree used by the utilities texconfig-sys, updmap-sys, and fmtutil-sys to store modiﬁed conﬁguration data.
+export TEXMFSYSVAR="$TEXDIR/texmf-var"
+#     │   └── texmf-var
+## TEXMFSYSVAR
+##   The (site-wide) tree used by texconfig-sys, updmap-sys and fmtutil-sys, and also by tlmgr, to store (cached) runtime data such as format ﬁles and generated map ﬁles.
+#file "$TEXDIR"
+#     ├── curr -> 2023
+## Update with latest version of lexlive
+export TEXUSERDIR="$HOME/nk/Dev/tex/live/homecurr"
+#:::  ├── home2023 (Default)
+export TEXMFCONFIG="$TEXUSERDIR/texmf-config"
+#     │   ├── texmf-config
+## TEXMFCONFIG
+##   The (personal) tree used by the utilities texconfig, updmap-sys, and fmtutil-sys to store modiﬁed conﬁguration data.
+export TEXMFCACHE="$TEXUSERDIR/texmf-cache"
+#     │   ├── texmf-cache
+## TEXMFCACHE
+##   The tree(s) used by ConTeXt MkIV and LuaLaTeX to store (cached) runtime data; defaults to TEXMFSYSVAR, or (if that’s not writable), TEXMFVAR.
+export TEXMFVAR="$TEXUSERDIR/texmf-var"
+#     │   └── texmf-var
+## TEXMFVAR
+##   The (personal) tree used by texconfig, updmap-user and fmtutil-user to store (cached) runtime data such as format ﬁles and generated map ﬁles.
+#file "$TEXUSERDIR"
+#     ├── homecurr -> home2023
+## Update with latest version of lexlive
+export TEXMFLOCAL="$HOME/nk/Dev/tex/live/texmf-local"
+#:::  ├── texmf-local (Common)
+## TEXMFLOCAL
+##   The tree which administrators can use for system-wide installation of additional or updated macros, fonts, etc.
+export TEXMFHOME="$HOME/nk/Dev/tex/live/texmf"
+#:::  └── texmf (Default)
+## TEXMFHOME
+##   The tree which users can use for their own individual installations of additional or updated macros, fonts, etc. For each user, this variable points to their own individual directory.
+#texLiveDir}
+#installTL{
+export TEXLIVE_INSTALL_PREFIX="$HOME/nk/Dev/tex/live"
+# export TEXLIVE_INSTALL_TEXDIR="$TEXDIR"
+# export TEXLIVE_INSTALL_TEXMFSYSCONFIG="$TEXMFSYSCONFIG"
+# export TEXLIVE_INSTALL_TEXMFSYSVAR="$TEXMFSYSVAR"
+# export TEXLIVE_INSTALL_TEXMFLOCAL="$TEXMFLOCAL"
+export TEXLIVE_INSTALL_TEXMFCONFIG="$TEXMFCONFIG"
+export TEXLIVE_INSTALL_TEXMFVAR="$TEXMFVAR"
+export TEXLIVE_INSTALL_TEXMFHOME="$TEXMFHOME"
+#installTL}
+#texLiveEnv{
+PATH="$TEXDIR/bin/x86_64-linux:$PATH"; export PATH
+MANPATH="$TEXMFDIST/doc/man:$MANPATH"; export MANPATH
+INFOPATH="$TEXMFDIST/doc/info:$INFOPATH"; export INFOPATH
+#texLiveEnv}
+
+## Finally execute command
+"$@"

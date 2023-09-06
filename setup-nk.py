@@ -61,6 +61,27 @@
 │   │   ├── mpl/ ...
 │   │   ├── sage/ ...
 │   │   :
+│   ├── tex/
+│   │   ├── .install-tl/
+│   │   │   ├── install.sh
+│   │   │   └── install-tl-20230831/ ...
+│   │   ├── bin/
+│   │   │   ├── teks
+│   │   │   :
+│   │   ├── live/
+│   │   │   ├── 2023/
+│   │   │   │   ├── bin/ ...
+│   │   │   │   ├── texmf-config/ ...
+│   │   │   │   ├── texmf-dist/ ...
+│   │   │   │   └── texmf-var/ ...
+│   │   │   ├── texmf-local/ ...
+│   │   │   ├── curr -> 2023
+│   │   │   ├── home2023/
+│   │   │   │   ├── texmf-config/ ...
+│   │   │   │   └── texmf-var/ ...
+│   │   │   ├── homecurr -> home2023
+│   │   │   └── texmf/ ...
+│   │   :
 │   ├── google/
 │   │   ├── dart/
 │   │   │   ├── flutter/
@@ -76,13 +97,14 @@
 │   :
 ├── Setup/
 │   ├── Dolphin/
-│   │   ├── dirs-icon.toml
+│   │   ├── dirs-info.toml
+│   │   ├── dirs-info_.toml
 │   │   :
 │   ├── Panel/
 │   │   ├── Scripts/
 │   │   │   :
 │   │   :
-│   ├── Sh
+│   ├── Sh/
 │   │   ├── zm_nk-profile.sh
 │   │   ├── nk-profile.sh
 │   │   ├── nk-profile.sh_notes
@@ -93,6 +115,10 @@
 │   │   │   ├── PYTHON.sh
 │   │   │   ├── LANGsByGoogle.sh
 │   │   │   :
+│   │   :
+│   ├── Tty/  #Yet2Do so much
+│   │   :
+│   ├── Others/
 │   │   :
 │   ├── .directory
 │   :
@@ -105,6 +131,7 @@
 import re
 import os
 import toml
+from glob import glob
 
 # Adding nk to user-places
 ###########################
@@ -212,14 +239,15 @@ set_folder_icon(NOTES_DIR_FILE, NOTES_ICON)
 set_folder_icon(SETUP_DIR_FILE, SETUP_ICON)
 
 SETUP_DOLPHIN = NK_DIR + 'Setup/Dolphin/'
-with open(SETUP_DOLPHIN+'dirs-icon.toml') as file:
+with open(SETUP_DOLPHIN+'dirs-info.toml') as file:
     dirs_icon = toml.load(file)
 
 def get_path_icon (dirs_icon):
     l=[]
     for i in dirs_icon.values():
         if 'path' in i.keys():
-            l.append(i)
+            if 'icon' in i.keys():
+                l.append(i)
         else:
             l.extend(get_path_icon(i))
     return l
@@ -239,6 +267,22 @@ for i in get_path_icon(dirs_icon['nk-Notes']):
 for i in get_path_icon(dirs_icon['home']):
     set_folder_icon(HOME_DIR+i['path']+'/.directory', i['icon'])
     os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{HOME_DIR+i['path']+'/.directory'}'")
+
+for j in [*glob(SETUP_DOLPHIN+'dirs-info-*.toml'), *glob(SETUP_DOLPHIN+'dirs-info_*.toml')]:
+    with open(j) as file:
+        dirs_icon = toml.load(file)
+
+    for i in get_path_icon(dirs_icon.get('nk', dict())):
+        set_folder_icon(NK_DIR+i['path']+'/.directory', i['icon'])
+        os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{NK_DIR+i['path']+'/.directory'}'")
+
+    for i in get_path_icon(dirs_icon.get('home', dict())):
+        set_folder_icon(HOME_DIR+i['path']+'/.directory', i['icon'])
+        os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{HOME_DIR+i['path']+'/.directory'}'")
+
+    for i in get_path_icon(dirs_icon.get('root', dict())):
+        set_folder_icon(i['path']+'/.directory', i['icon'])
+        os.system(f"sed 's#{'Icon='+NK_DIR+'.assets/'}#Icon=#g' -i '{i['path']+'/.directory'}'")
 
 # Adding nk-profile
 ####################
@@ -332,8 +376,14 @@ if os.path.isfile(ZSHRC):
 # Setting CONFIG & DATA dir for Jupyter
 ########################################
 
-for i in ['bin', 'config', 'data', 'py', 'ipy', 'mpl', 'sage']:
+for i in ['config', 'data', 'ipy', 'mpl', 'sage']:
     os.makedirs(os.path.join(NK_DIR, f"Dev/jupyter/{i}"), exist_ok=True)
+
+# Setting CONFIG & DATA dir for TeX
+####################################
+
+for i in ['live/texmf', 'live/texmf-local', 'repo/books']:
+    os.makedirs(os.path.join(NK_DIR, f"Dev/tex/{i}"), exist_ok=True)
 
 # Setting dirs related to Google langs and others
 ##################################################

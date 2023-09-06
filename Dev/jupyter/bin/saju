@@ -1,0 +1,4 @@
+#!/bin/sh
+# execute in Sage --sh with Jupyter Env
+
+echo '#Yet2Do'
