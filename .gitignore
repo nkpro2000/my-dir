@@ -16,11 +16,24 @@
 /Dev/jupyter/**
 /Dev/tex/**
 /Dev/google/
+/Dev/oaks/**
+# User/Sys data of IDEs
+/Dev/code/ides/**
+# But include IDEA.properties
+!/Dev/code/ides/idea/
+/Dev/code/ides/idea/**
+## https://stackoverflow.com/questions/65776556/exclamation-mark-in-gitignore-doesnt-work
+!/Dev/code/ides/idea/*-idea.properties
 # Not to upload
 /Dev/.ssh/
 # Tools for Dev
 /Dev/bin/flutter/
-/Dev/bin/VSCode-linux-x64/
+# NKAsCode
+/Dev/bin/VSCod*-?????-*/
+# IDEs
+/Dev/bin/ides/VSCod*-?????-*/
+/Dev/bin/ides/ideaI?-*/
+/Dev/bin/ides/ideaI?/
 # Better to be in local
 /Notes/*
 # Better to be in local OR other repo
@@ -41,6 +54,18 @@
 .vscode/
 # PYTHON Byte-compiled / optimized / DLL files
 __pycache__/
+
+### WindowsOS ###
+## ScoopInstaller
+# To install Scoop, just git repo
+/Dev/bin/scoop/.install-si/
+# -ScoopDir while installing scoop
+/Dev/bin/scoop/dir/
+# Can `git add` wanted files manually
+/Dev/bin/scoop/persist-in-windows/home-dir/**
+## Others
+# Folder metadata
+desktop.ini
 
 ### Some personal dirs ###
 # Place for testing, Currently Working, Place for Future/Past Projects
