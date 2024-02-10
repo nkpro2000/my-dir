@@ -82,38 +82,6 @@ desktop.ini
 /Things/
 
 
-## Testing repo
-# ~/nk >>> git ls-files | column                                      ±[●][master]
-# .assets/Dev.ico                                                 Dev/jupyter/py/jupyter-data/kernels/python3-venv/logo-svg.svg
-# .assets/Dev.png                                                 Dev/jupyter/py/venv/pyvenv.cfg
-# .assets/NK.ico                                                  Dev/lobby/.gitkeep
-# .assets/NK.png                                                  Dev/tex/bin/teks
-# .assets/NewK.ico                                                Dev/tex/live/.install-tl/install.sh
-# .assets/Notes.ico                                               Dev/tex/repo/ctan-archive/get-all.sh
-# .assets/Notes.png                                               Notes/.gitkeep
-# .assets/nk.ico                                                  Setup/Dolphin/dirs-info.toml
-# .assets/nk.png                                                  Setup/Panel/Scripts/.gitkeep
-# .assets/nk_.ico                                                 Setup/Sh/Envs.sh
-# .assets/nk_.png                                                 Setup/Sh/Envs/LANGsByGoogle.sh
-# .gitignore                                                      Setup/Sh/Envs/PYTHON.sh
-# .secrets/.gen                                                   Setup/Sh/nk-profile.sh
-# .secrets/secret5.py                                             Setup/Sh/nk-profile.sh_notes
-# .secrets/secret5.sh                                             Setup/Sh/nk-profile.sh_notes2
-# .unsat                                                          Setup/Sh/nk-rcfile.sh
-# Dev/Envs/Github.sh                                              Setup/Sh/zm_nk-profile.sh
-# Dev/Envs/Python.sh                                              Setup/Tty/docs/dumpkeys-_notes
-# Dev/Envs/Shell.sh                                               Setup/Tty/docs/dumpkeys-l_notes
-# Dev/bin/.generate_path                                          Setup/Tty/docs/dumpkeys_notes
-# Dev/bin/.path                                                   Setup/Tty/docs/loadkeys_notes.md
-# Dev/bin/<any_code_editor>/bin/.gitkeep                          Setup/Tty/keymaps/nk_kbd-header.inc
-# Dev/bin/<any_code_editor>/data                                  Setup/Tty/keymaps/nk_kbd-shctlr.map
-# Dev/bin/code                                                    Setup/Tty/keymaps/nk_kbd-us-alpnum.map
-# Dev/code/data/.gitkeep                                          Setup/Tty/keymaps/nk_kbd-us-splchr.map
-# Dev/jupyter/.pyvenv/pyvenv.cfg                                  Setup/Tty/keymaps/nk_kbd-us.map_notes
-# Dev/jupyter/bin/jupy                                            Setup/Tty/setup-nk_kbd.py
-# Dev/jupyter/bin/saju                                            nk.py
-# Dev/jupyter/py/jupyter-data/kernels/python3-venv/kernel.json    setup-nk.py
-
 ## Testing .gitignore
 # ~/nk >>> find . -path './.git' -prune -o -type d -printf '%p/\n' -o -print | sort | while if [ -z "$i" ]; then IFS= read -r i; fi; do
 # if git check-ignore -v "$i" 1>/dev/null; then tput setaf 1; echo X "$i"; else tput setaf 10; echo O "$i"; fi
