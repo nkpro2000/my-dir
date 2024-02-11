@@ -44,3 +44,5 @@ nk_devenv
 nk-kbdmap
 
 # used nk_kbd- for my keymap files (Eg: nk_kbd-us{,1,2,...}.map.gz).
+
+# used .nkJn for folders to which junction to be made (for scoop/persist-in-windows/do_links.ps1)
