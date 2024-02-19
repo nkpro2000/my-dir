@@ -6,6 +6,9 @@
 
 #Requires -PSEdition Core
 
+[Diagnostics.CodeAnalysis.SuppressMessageAttribute(
+    'PSAvoidDefaultValueSwitchParameter'
+)]
 Param (
     [Parameter(
         Position = 0, ValueFromRemainingArguments = $true, Mandatory=$false,
@@ -19,6 +22,8 @@ Param (
     [Parameter(Mandatory=$false, HelpMessage = "do Symbolic Links")]
     [Switch]$Sl = $false,
 
+    [Parameter(Mandatory=$false, HelpMessage = "Dry run")]
+    [Switch]$d = $true,
     [Parameter(Mandatory=$false, HelpMessage = "Verbose")]
     [Switch]$v = $false
 )
@@ -28,14 +33,19 @@ If($v){ Write-Host "|> Current Working Dir : $(Get-Location)" }
 
 Function do_on ($p) {
 If($v){ Write-Host "|> doing links on $p (Rel.toCWD)" }
-foreach($i in (Get-ChildItem -Path "$p"|%{$_.Name})) { Try{
+ForEach($i in (Get-ChildItem -Path "$p"|ForEach-Object{$_.Name})) { Try{
 # Core-Logic{
 
 If (Test-Path -Path "$p\$i" -PathType 'Leaf') {
 If ($Hl -And -Not (Get-Item -Path "$p\$i").LinkType) {
 ## File !Link {
 
-echo "Yet2Do F!L $p\$i"
+If ($d) {
+    echo "echo `"Yet2Do F!L $p\$i`""
+}
+Else {
+    echo "Yet2Do F!L $p\$i"
+}
 
 }ElseIf ($Hl -And (Get-Item -Path "$p\$i").LinkType -eq "HardLink") {
 ## HardLink File {
@@ -56,7 +66,12 @@ If (-Not (Get-Item -Path "$p\$i").LinkType) {
 If("$i" -notmatch "\.nkJn$"){ do_on("$p\$i") }ElseIf($Jn){
 ## Folder !Link {
 
-echo "Yet2Do D!L $p\$i"
+If ($d) {
+    echo "echo `"Yet2Do D!L $p\$i`""
+}
+Else {
+    echo "Yet2Do D!L $p\$i"
+}
 
 }}ElseIf ($Jn -And (Get-Item -Path "$p\$i").LinkType -eq "Junction") {
 ## Junction
@@ -76,11 +91,10 @@ Write-Host "I> Just SymLD $p\$i"
     If($v){
         Write-Host "|> ``-> $_"
         Write-Host "|> ``-> $($_.CategoryInfo)"
-        Write-Host "|> ``-> $($_.ScriptStackTrace|ForEach{$_.Replace("`n","`n|> ``-> ")})"
+        Write-Host "|> ``-> $($_.ScriptStackTrace|ForEach-Object{$_.Replace("`n","`n|> ``-> ")})"
 }}}}
 
 
 ForEach($p in $Paths) {
-    #If($v){ Write-Host "|> doing links on $p (Rel.toCWD)" }
     do_on($p)
 }
