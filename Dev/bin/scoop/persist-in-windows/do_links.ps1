@@ -7,7 +7,7 @@
 #Requires -PSEdition Core
 
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute(
-    'PSAvoidDefaultValueSwitchParameter'
+    'PSAvoidDefaultValueSwitchParameter', ''
 )]
 Param (
     [Parameter(
@@ -40,11 +40,12 @@ If (Test-Path -Path "$p\$i" -PathType 'Leaf') {
 If ($Hl -And -Not (Get-Item -Path "$p\$i").LinkType) {
 ## File !Link {
 
-If ($d) {
-    echo "echo `"Yet2Do F!L $p\$i`""
-}
-Else {
-    echo "Yet2Do F!L $p\$i"
+Write-Host `
+"$> New-Item -ItemType HardLink -Force `
+        -Name `"$p\$i`" -Value `"$Env:UserProfile\$p\$i`""
+If (-Not $d) {
+    New-Item -ItemType HardLink -Force `
+        -Name "$p\$i" -Value "$Env:UserProfile\$p\$i"
 }
 
 }ElseIf ($Hl -And (Get-Item -Path "$p\$i").LinkType -eq "HardLink") {
@@ -60,17 +61,34 @@ Else{ Write-Host " ($((fsutil hardlink list "$p\$i").Count))"}
 Write-Host "I> Just SymLk $p\$i"
 
 }}
-
 ElseIf (Test-Path -Path "$p\$i" -PathType 'Container') {
 If (-Not (Get-Item -Path "$p\$i").LinkType) {
-If("$i" -notmatch "\.nkJn$"){ do_on("$p\$i") }ElseIf($Jn){
+If ("$i" -notmatch "\.nkJn$"){ do_on("$p\$i")
+If($v){ Write-Host "|> done!, back on $p (Rel.toCWD)" } }ElseIf ($Jn){
 ## Folder !Link {
 
-If ($d) {
-    echo "echo `"Yet2Do D!L $p\$i`""
-}
-Else {
-    echo "Yet2Do D!L $p\$i"
+If (
+    (Test-Path -Path "$Env:UserProfile\$p\$("$i".Substring(0,$i.Length-5))") `
+    -And ((Get-Item -Path "$Env:UserProfile\$p\$("$i".Substring(0,$i.Length-5))").LinkType -eq "Junction") `
+    -And (
+        (Get-Item -Path "$Env:UserProfile\$p\$("$i".Substring(0,$i.Length-5))").Target -eq `
+        (Get-Item -Path "$Env:UserProfile\nk\Dev\bin\scoop\persist-in-windows\home-dir\$p\$i").FullName
+    )
+) {
+    Write-Host "I> Already Junctioned $p\$i"
+    If($v){ Write-Host "|> ``-> $(
+            (Get-Item -Path "$Env:UserProfile\$p\$("$i".Substring(0,$i.Length-5))").FullName)->$(
+            (Get-Item -Path "$Env:UserProfile\$p\$("$i".Substring(0,$i.Length-5))").Target)" }
+} Else {
+    Write-Host `
+    "$> New-Item -ItemType Junction `
+            -Path `"$Env:UserProfile\$p`" -Name `"$("$i".Substring(0,$i.Length-5))`" `
+            -Target `"$Env:UserProfile\nk\Dev\bin\scoop\persist-in-windows\home-dir\$p\$i`""
+    If (-Not $d) {
+        New-Item -ItemType Junction `
+            -Path "$Env:UserProfile\$p" -Name "$("$i".Substring(0,$i.Length-5))" `
+            -Target "$Env:UserProfile\nk\Dev\bin\scoop\persist-in-windows\home-dir\$p\$i"
+    }
 }
 
 }}ElseIf ($Jn -And (Get-Item -Path "$p\$i").LinkType -eq "Junction") {
@@ -84,7 +102,6 @@ Write-Host "I> IDKwhat2do $p\$i"
 Write-Host "I> Just SymLD $p\$i"
 
 }}
-
 # Core-Logic}
 }Catch{
     Write-Host "?> Errored at $p\$i"
