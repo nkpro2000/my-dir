@@ -13,10 +13,12 @@
 # It is populated
 /Dev/code/data/**
 /Dev/lobby/**
-/Dev/jupyter/**
-/Dev/tex/**
-/Dev/google/
+/Dev/s/**
 /Dev/oaks/**
+/Dev/w3js/**
+/Dev/google/
+/Dev/tex/**
+/Dev/jupyter/**
 # User/Sys data of IDEs
 /Dev/code/ides/**
 # But include IDEA.properties
@@ -34,6 +36,7 @@
 /Dev/bin/ides/VSCod*-?????-*/
 /Dev/bin/ides/ideaI?-*/
 /Dev/bin/ides/ideaI?/
+/Dev/bin/ides/eclipse-java-?????-*/
 # Better to be in local
 /Notes/*
 # Better to be in local OR other repo

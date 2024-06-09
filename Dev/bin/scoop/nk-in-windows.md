@@ -592,6 +592,16 @@ PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> bat .\.git\info\*
    5   │ # *.[oa]
    6   │ # *~
 ───────┴───────────────────────────────────────────────────────────────────────────────
+PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> cp ..\..\..\nk\.git\info\sparse-checkout .\.git\info\
+PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> bat .\.git\info\sparse-checkout
+───────┬───────────────────────────────────────────────────────────────────────────────
+       │ File: .\.git\info\sparse-checkout
+───────┼───────────────────────────────────────────────────────────────────────────────
+   1   │ /*
+   2   │ !/Dev/bin/<any_code_editor>
+   3   │ !/.assets/NK.ico
+   4   │ !/.assets/NK.png
+───────┴───────────────────────────────────────────────────────────────────────────────
 PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> git config core.protectNTFS false
 PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> git config core.sparseCheckout true
 PS C:\Users\naveen.s.r\Videos\Lobby\my-dir> git checkout
