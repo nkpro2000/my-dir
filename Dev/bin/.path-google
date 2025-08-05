@@ -1,0 +1,5 @@
+# Flutter related #
+
+# Android :
+r ../google/android/sdk/cmdline-tools/bin
+r ../google/android/sdk/platform-tools

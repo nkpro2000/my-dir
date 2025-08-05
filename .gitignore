@@ -31,15 +31,16 @@
 # Tools for Dev
 /Dev/bin/flutter/
 # NKAsCode
-/Dev/bin/VSCod*-?????-*/
+/Dev/bin/VSCod*/
 # IDEs
-/Dev/bin/ides/VSCod*-?????-*/
+/Dev/bin/ides/VSCod*/
 /Dev/bin/ides/ideaI?-*/
 /Dev/bin/ides/ideaI?/
 /Dev/bin/ides/eclipse-java-?????-*/
 # Better to be in local
 /Notes/*
 # Better to be in local OR other repo
+/Dev/bin/.path_*
 /Setup/Dolphin/dirs-info_*.toml
 # May upload in other repos
 /Setup/Panel/Scripts/**

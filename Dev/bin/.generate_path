@@ -33,10 +33,10 @@ while IFS= read -r -u3 dir_path || [[ -n "$dir_path" ]]; do
             ;;
     esac
 
-done 3< <(tail -n +22 ~/nk/Dev/bin/.path)
+done 3< <(cat <(tail -n +22 ~/nk/Dev/bin/.path) ~/nk/Dev/bin/.path-* ~/nk/Dev/bin/.path_*)
 # https://stackoverflow.com/a/10929511
 
 dot_path_content="$(tail -n +3 ~/nk/Dev/bin/.path)"
 echo "${profile_path}" > ~/nk/Dev/bin/.path
 echo "${rcfiles_path}" >> ~/nk/Dev/bin/.path
-echo -n "${dot_path_content}" >> ~/nk/Dev/bin/.path
+echo "${dot_path_content}" >> ~/nk/Dev/bin/.path

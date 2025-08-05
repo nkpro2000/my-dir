@@ -17,7 +17,7 @@ export PUB_CACHE="$HOME/.pub-cache"
 #pub} https://dart.dev/tools/pub/environment-variables
 
 #flutter{
-export ANDROID_HOME=/opt/android-sdk
+export ANDROID_HOME="$HOME/nk/Dev/google/android/sdk"
 export CHROME_EXECUTABLE=/opt/google/chrome/google-chrome
 #flutter}
 
